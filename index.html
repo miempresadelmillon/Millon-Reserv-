@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Millon Reserv</title>
+<meta name="description" content="Millon Reserv: agenda en línea para cualquier negocio. 3 días gratis.">
+<meta property="og:title" content="Millon Reserv">
+<meta property="og:description" content="Agenda en línea para cualquier negocio. 3 días gratis.">
+<meta name="theme-color" content="#02040a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306091a'/%3E%3Cpath d='M14 48V16l18 22 18-22v32' fill='none' stroke='%23a8c8ff' stroke-width='5' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="millon-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#02040a; --ink:#eef3fb; --mute:#b9c5d9; --silver:#d9e3f2; --ice:#bcd4ff;
+  --blue:#5b9dff; --blue2:#2f6bff; --red:#ff3347; --red2:#ff6b78; --line:rgba(176,205,255,.17);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:"Inter Tight","Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(ellipse 60% 50% at 78% 0%,rgba(60,110,255,.20),transparent 70%),
+  radial-gradient(ellipse 45% 38% at 0% 18%,rgba(255,45,70,.13),transparent 70%),
+  radial-gradient(ellipse 40% 30% at 100% 62%,rgba(255,45,70,.10),transparent 70%),
+  radial-gradient(ellipse 50% 40% at 0% 55%,rgba(90,150,255,.09),transparent 70%),
+  radial-gradient(ellipse 60% 40% at 100% 100%,rgba(120,170,255,.10),transparent 70%)}
+#motes{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+a{color:inherit}
+.shell{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- vidrio ---------- */
+.glass{position:relative;border-radius:28px;background:linear-gradient(165deg,rgba(255,255,255,.075),rgba(255,255,255,.012) 58%),rgba(5,8,16,.84);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;background:linear-gradient(180deg,rgba(205,228,255,.6),rgba(205,228,255,0) 42%),linear-gradient(0deg,rgba(255,60,80,.5),rgba(255,60,80,0) 34%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+
+/* ---------- botones ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:999px;font:600 16px/1 "Inter Tight",system-ui,sans-serif;text-decoration:none;cursor:pointer;border:0;transition:transform .15s,box-shadow .2s,background .2s}
+.btn.primary{background:linear-gradient(180deg,#f4f8ff,#adcbff 55%,#5b9dff);color:#06132a;box-shadow:0 0 0 1px rgba(230,240,255,.7) inset,0 10px 38px rgba(77,139,255,.45)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.9) inset,0 14px 48px rgba(91,157,255,.65)}
+.btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink)}
+.btn.ghost:hover{background:rgba(255,255,255,.11);border-color:rgba(255,90,110,.6);box-shadow:0 0 26px rgba(255,50,75,.28)}
+.hot{background:linear-gradient(180deg,#ff8a95,#ff2e45 85%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(255,50,75,.35))}
+
+/* ---------- navegacion ---------- */
+nav{position:sticky;top:max(12px,env(safe-area-inset-top,0px));z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:19px;letter-spacing:-.01em;padding:8px 14px 8px 10px;border-radius:999px;background:rgba(7,10,19,.7);border:1px solid var(--line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.brand svg{display:block}
+.brand span{color:var(--silver)}
+.brand b{font-weight:600;background:linear-gradient(180deg,#fff,#8fb8ff);-webkit-background-clip:text;background-clip:text;color:transparent;margin-left:-6px}
+.navpill{display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:rgba(7,10,19,.7);border:1px solid var(--line);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.navpill a{text-decoration:none;font-size:15px;color:var(--mute);padding:9px 16px;border-radius:999px;transition:color .15s,background .15s}
+.navpill a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.navr{display:flex;align-items:center;gap:8px}
+.langs{display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(7,10,19,.7);border:1px solid var(--line)}
+.langs button{font:600 12px/1 "Inter Tight",system-ui,sans-serif;letter-spacing:.06em;color:var(--mute);background:none;border:0;border-radius:999px;padding:8px 9px;cursor:pointer}
+.langs button[aria-pressed="true"]{color:#06132a;background:linear-gradient(180deg,#f4f8ff,#9fc2ff)}
+.navcta{padding:12px 18px;font-size:15px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.8fr);gap:40px;align-items:center;padding:64px 0 36px;min-height:740px}
+#jelly{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.shell{position:relative;z-index:1}
+.hero-copy{position:relative;z-index:2;min-width:0}
+.pill{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--ice);padding:8px 16px 8px 12px;border-radius:999px;background:rgba(91,157,255,.10);border:1px solid rgba(140,185,255,.28);margin-bottom:26px}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 12px 3px rgba(255,50,75,.85)}
+h1{font-weight:500;font-size:clamp(36px,4.9vw,68px);line-height:1;letter-spacing:-.045em;max-width:640px;text-wrap:balance;background:linear-gradient(180deg,#ffffff 30%,#9cc2ff 115%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:24px;max-width:520px;font-size:19px;color:#d3dcec;text-shadow:0 1px 18px rgba(0,0,0,.9)}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+
+/* demo de reserva */
+.demo{position:relative;z-index:2;padding:22px;min-width:0}
+.demo-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.demo-head .name{font-weight:600;font-size:20px;letter-spacing:-.02em}
+.demo-head .day{font-size:14px;color:var(--mute);margin-top:2px}
+.tag{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ice);border:1px solid rgba(140,185,255,.3);border-radius:999px;padding:5px 11px;white-space:nowrap;background:rgba(91,157,255,.08)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:58px;border-radius:16px;padding:8px 4px;border:1px solid rgba(170,205,255,.35);background:rgba(120,170,255,.06);color:var(--ink);font-family:inherit;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s}
+.slot b{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.slot small{font-size:12px;color:var(--mute)}
+.slot:hover:not(:disabled){background:rgba(120,170,255,.16);transform:translateY(-2px)}
+.slot.chosen{background:linear-gradient(180deg,#e8f1ff,#8db8ff);color:#06132a;border-color:#fff;box-shadow:0 0 28px rgba(120,175,255,.65)}
+.slot.chosen small{color:#16305e}
+.slot:disabled{cursor:default}
+.slot.busy{background:rgba(255,255,255,.025);border-color:rgba(255,255,255,.07);color:#5b6679}
+.slot.busy small{color:#4b5568}
+.slot.lunch{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 6px,transparent 6px 12px);border-color:rgba(255,255,255,.07);color:#5b6679}
+.slot.lunch small{color:#4b5568}
+.demo-foot{margin-top:14px}
+#hint{font-size:15px;color:var(--mute);min-height:24px;text-align:center}
+.form{display:flex;flex-direction:column;gap:9px}
+#formIntro{font-size:15px;text-align:center;color:var(--silver)}
+.form input{width:100%;font:500 16px "Inter Tight",system-ui,sans-serif;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:14px;padding:13px 15px;outline:none}
+.form input:focus{border-color:#8fb8ff;box-shadow:0 0 0 3px rgba(91,157,255,.22)}
+.form input::placeholder{color:#74829a}
+.form .err{font-size:14px;color:#ffb3a8;min-height:18px}
+.form .ok{font:600 16px "Inter Tight",system-ui,sans-serif;border:0;border-radius:999px;padding:14px;cursor:pointer;color:#06132a;background:linear-gradient(180deg,#f4f8ff,#9fc2ff 60%,#5b9dff);box-shadow:0 8px 28px rgba(77,139,255,.4)}
+.done{text-align:center;padding:6px 0}
+.done .t{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.done .d{margin:6px 0 12px;color:var(--mute);font-size:15px}
+.done button{font:500 14px "Inter Tight",system-ui,sans-serif;color:var(--ice);background:none;border:1px solid var(--line);border-radius:999px;padding:9px 16px;cursor:pointer}
+.legend{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:11px;height:11px;border-radius:4px;display:inline-block}
+
+/* ---------- bloques ---------- */
+.block{padding:52px 0}
+.eyebrow{display:inline-block;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red2);margin-bottom:18px}
+h2{font-weight:500;font-size:clamp(30px,4.1vw,56px);line-height:1.03;letter-spacing:-.04em;text-wrap:balance;background:linear-gradient(180deg,#fff 35%,#a9c8ff 130%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.head{max-width:820px;margin-bottom:38px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:16px}
+.grid.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+
+.stat{padding:30px 28px;display:flex;flex-direction:column;gap:12px}
+.stat .num{font-size:clamp(54px,6vw,80px);font-weight:300;line-height:1;letter-spacing:-.05em;background:linear-gradient(180deg,#fff,#8fb8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .tx{font-size:17px;color:var(--silver)}
+.stat .src{font-size:13px;color:#6e7d95;margin-top:auto}
+
+.plaque{padding:32px 30px;display:flex;flex-direction:column;gap:12px}
+.plaque h3{font-size:25px;font-weight:500;letter-spacing:-.03em}
+.plaque p{color:var(--mute)}
+.fix{margin-top:auto;padding:14px 16px;border-radius:16px;background:rgba(91,157,255,.09);border:1px solid rgba(140,185,255,.22)}
+.fix .lb{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red2);margin-bottom:3px}
+.fix .tx{color:#fff;font-weight:500}
+
+.step{padding:30px 28px;display:flex;flex-direction:column;gap:10px;min-height:290px}
+.step .rn{font-size:76px;font-weight:300;line-height:1;letter-spacing:-.06em;background:linear-gradient(180deg,#fff,rgba(143,184,255,.15));-webkit-background-clip:text;background-clip:text;color:transparent}
+.step .lb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red2)}
+.step h3{font-size:23px;font-weight:500;letter-spacing:-.03em;margin-top:auto}
+.step p{color:var(--mute);font-size:16px}
+
+.panelrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:stretch;padding:28px 0}
+.agenda{padding:26px}
+.agenda .top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.agenda .top b{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.appt{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 16px;margin-top:8px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.appt .h{font-weight:600;color:var(--ice)}
+.appt .s{font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.appt.blocked{background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 6px,transparent 6px 12px);color:#6a7890;grid-template-columns:62px minmax(0,1fr)}
+.appt.blocked span:first-child{color:#6a7890}
+.panelcopy{padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
+.panelcopy h2{margin-bottom:18px;font-size:clamp(28px,3.4vw,44px)}
+.panelcopy p{color:var(--mute);max-width:460px}
+
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chips span{padding:13px 22px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--silver);font-size:17px}
+.chips span:hover{border-color:rgba(160,200,255,.5);background:rgba(91,157,255,.11)}
+
+.price{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:30px;align-items:center;padding:clamp(28px,4vw,56px);overflow:hidden}
+.price::after{content:"";position:absolute;right:-8%;top:-30%;width:60%;height:160%;background:radial-gradient(closest-side,rgba(255,50,75,.22),rgba(91,157,255,.12) 60%,transparent);pointer-events:none}
+.price .l{position:relative;z-index:1}
+.price h2{margin-bottom:16px;font-size:clamp(28px,3.6vw,48px)}
+.price p{color:var(--mute);max-width:480px}
+.pr{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.amount{font-size:clamp(84px,11vw,150px);font-weight:300;line-height:.9;letter-spacing:-.07em;background:linear-gradient(180deg,#fff 20%,#7fb0ff 120%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.amount small{font-size:.17em;letter-spacing:0;font-weight:500;color:var(--mute);-webkit-text-fill-color:var(--mute);margin-left:4px}
+.seal{width:108px;height:108px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;color:#06132a;background:radial-gradient(circle at 35% 25%,#ffd0d5,#ff5668 55%,#c4122a);color:#fff;box-shadow:0 0 0 6px rgba(255,70,90,.18),0 0 44px rgba(255,50,75,.6)}
+.seal b{font-size:40px;font-weight:600;letter-spacing:-.04em}
+.seal small{font-size:12px;font-weight:600;padding:0 10px}
+
+.contact{text-align:center;padding:84px 0 70px}
+.contact h2{max-width:860px;margin:0 auto 20px}
+.contact p{color:var(--mute);max-width:560px;margin:0 auto 30px}
+footer{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:26px 0 calc(34px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:#74829a;font-size:15px;text-align:center}
+footer b{color:var(--silver);font-weight:600}
+
+@media (max-width:980px){
+  .navpill{display:none}
+  .hero{grid-template-columns:minmax(0,1fr);padding-top:40px;min-height:0;gap:30px}
+  .panelrow,.price{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  nav{flex-wrap:wrap}
+  .navcta{display:none}
+  .demo{padding:16px}
+  .slot b{font-size:16px}
+  .step{min-height:0}
+  .appt{grid-template-columns:54px minmax(0,1fr)}
+  .appt .s{grid-column:2;justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="motes" aria-hidden="true"></canvas>
+<canvas id="jelly" aria-hidden="true"></canvas>
+
+<div class="shell">
+<nav>
+  <a class="brand" href="#top" aria-label="Millon Reserv">
+    <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#6fa4ff"/></linearGradient></defs><circle cx="32" cy="32" r="29" fill="none" stroke="url(#mg)" stroke-width="3"/><path d="M19 45V20l13 16 13-16v25" fill="none" stroke="url(#mg)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+    <span>Millon</span><b>Reserv</b>
+  </a>
+  <div class="navpill">
+    <a href="#como" data-i18n="navHow"></a>
+    <a href="#dolor" data-i18n="navPain"></a>
+    <a href="#precio" data-i18n="navPrice"></a>
+  </div>
+  <div class="navr">
+    <div class="langs" role="group" aria-label="Idioma / Language" id="langs"></div>
+    <a class="btn primary navcta" href="#contacto" data-i18n="navCta"></a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+    <div class="hero-copy">
+    <div class="pill" data-i18n="eyebrow"></div>
+    <h1 data-i18n="heroTitle"></h1>
+    <p class="lead" data-i18n="heroText"></p>
+    <div class="row">
+      <a class="btn primary" href="#contacto" data-i18n="ctaTrial"></a>
+      <a class="btn ghost" href="#como" data-i18n="ctaHow"></a>
+    </div>
+  </div>
+
+  <div class="glass demo">
+    <div class="demo-head">
+      <div>
+        <div class="name" data-i18n="demoName"></div>
+        <div class="day" data-i18n="demoDay"></div>
+      </div>
+      <div class="tag" data-i18n="example"></div>
+    </div>
+    <div class="slots" id="slots"></div>
+    <div class="demo-foot">
+      <div id="hint" data-i18n="tapHint"></div>
+      <div class="form" id="form" hidden>
+        <div id="formIntro"></div>
+        <input id="cli-nombre" type="text" autocomplete="off" data-i18n-ph="namePh" data-i18n-aria="namePh">
+        <input id="cli-telefono" type="tel" inputmode="tel" autocomplete="off" data-i18n-ph="phonePh" data-i18n-aria="phonePh">
+        <div class="err" id="err"></div>
+        <button class="ok" id="confirm" type="button" data-i18n="confirmBtn"></button>
+      </div>
+      <div class="done" id="done" hidden>
+        <div class="t" data-i18n="doneTitle"></div>
+        <div class="d" id="doneText"></div>
+        <button id="again" type="button" data-i18n="again"></button>
+      </div>
+      <div class="legend">
+        <span><i style="border:1px solid rgba(170,205,255,.6)"></i><em style="font-style:normal" data-i18n="free"></em></span>
+        <span><i style="background:linear-gradient(180deg,#e8f1ff,#8db8ff)"></i><em style="font-style:normal" data-i18n="chosen"></em></span>
+        <span><i style="background:#1a2030;border:1px solid #2a3244"></i><em style="font-style:normal" data-i18n="busy"></em></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:20px">
+  <div class="grid" id="stats"></div>
+</section>
+
+<section class="block" id="dolor">
+  <div class="head">
+    <div class="eyebrow" data-i18n="painEyebrow"></div>
+    <h2 data-i18n="painTitle"></h2>
+  </div>
+  <div class="grid two" id="pains"></div>
+</section>
+
+<section class="block" id="como">
+  <div class="head" style="max-width:680px">
+    <div class="eyebrow" data-i18n="howEyebrow"></div>
+    <h2 data-i18n="howTitle"></h2>
+  </div>
+  <div class="grid" id="steps"></div>
+</section>
+
+<section class="panelrow">
+  <div class="glass agenda">
+    <div class="top"><b data-i18n="todayTitle"></b><span class="tag" data-i18n="example"></span></div>
+    <div class="appt"><span class="h">9:45</span><span class="c"><span data-i18n="client"></span> A</span><span class="s" data-i18n="svcCut"></span></div>
+    <div class="appt"><span class="h">11:15</span><span class="c"><span data-i18n="client"></span> B</span><span class="s" data-i18n="svcCutBeard"></span></div>
+    <div class="appt blocked"><span style="white-space:nowrap">12:45</span><span class="c" data-i18n="lunchBlocked"></span></div>
+    <div class="appt"><span class="h">14:45</span><span class="c"><span data-i18n="client"></span> C</span><span class="s" data-i18n="svcCut"></span></div>
+  </div>
+  <div class="glass panelcopy">
+    <div class="eyebrow" data-i18n="panelEyebrow"></div>
+    <h2 data-i18n="panelTitle"></h2>
+    <p data-i18n="panelText"></p>
+  </div>
+</section>
+
+<section class="block" id="negocios">
+  <h2 style="max-width:760px" data-i18n="typesTitle"></h2>
+  <div class="chips" id="types"></div>
+</section>
+
+<section class="block" id="precio">
+  <div class="glass price">
+    <div class="l">
+      <div class="eyebrow" data-i18n="priceEyebrow"></div>
+      <h2 data-i18n="priceTitle"></h2>
+      <p data-i18n="priceText"></p>
+    </div>
+    <div class="pr">
+      <div class="amount">$35<small> <span data-i18n="perMonth"></span></small></div>
+      <div class="seal" aria-hidden="true"><b id="sealN"></b><small id="sealT"></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <h2 data-i18n="contactTitle"></h2>
+  <p data-i18n="contactText"></p>
+  <a class="btn primary" id="contactBtn" href="#" hidden target="_blank" rel="noopener"></a>
+</section>
+
+<footer><b>Millon Reserv</b> · <span data-i18n="footer"></span></footer>
+</div>
+
+<script>
+(function(){
+/* ===== CONTACTO =====
+   Para activar el boton de contacto, rellena estas dos lineas. Ejemplo:
+   var CONTACT = { label: "Instagram: @reservx", url: "https://instagram.com/reservx" };
+   Mientras url este vacio, el boton no se muestra. */
+var CONTACT = { label: "Instagram: @millonreserv", url: "https://instagram.com/millonreserv" };
+
+var T = {
+  es: {
+    navHow:"Cómo funciona", navPain:"Lo que pierdes", navPrice:"Precio", navCta:"Quiero mi agenda",
+    eyebrow:"Agenda en línea para cualquier negocio", heroTitle:"Cada llamada que no contestas es un cliente que se va con otro.",
+    heroText:"Mientras trabajas no puedes atender el teléfono. Millon Reserv abre tu agenda las 24 horas: tus clientes ven tus horas libres y reservan solos, aunque estés ocupado o cerrado.",
+    ctaTrial:"Empieza hoy, 3 días gratis", ctaHow:"Ver cómo funciona",
+    demoName:"Barbería Demo", demoDay:"Jueves 12 · Corte clásico · 45 min", example:"Ejemplo",
+    free:"Libre", chosen:"Tu elección", busy:"Ocupado", lunch:"Almuerzo", picked:"Elegida", booked:"Agendado",
+    tapHint:"Toca una hora libre para reservar.", formIntro:"Jueves 12 a las {time}. Pon tus datos:",
+    namePh:"Tu nombre", phonePh:"📞 Tu teléfono", errMissing:"Falta tu nombre y tu teléfono.", confirmBtn:"Confirmar turno",
+    doneTitle:"Listo ✅ Agendado", doneText:"{name}, tu turno es el jueves 12 a las {time}.", again:"Probar otra vez",
+    stats:[
+      {num:"82%", text:"de los consumidores dice que llamaría a otro negocio si nadie contesta.", src:"CallRail, encuesta 2025"},
+      {num:"67%", text:"prefiere reservar en línea antes que llamar.", src:"GetApp, 2024"},
+      {num:"40%", text:"de las reservas en línea se hacen fuera del horario del negocio.", src:"SimplyBook.me, 2025"}
+    ],
+    painEyebrow:"Lo que te cuesta hoy", painTitle:"Cada día sin agenda en línea pierdes clientes sin enterarte.", fixLabel:"Con Millon Reserv",
+    pains:[
+      {title:"Llamadas perdidas", hurt:"Tienes las manos ocupadas y suena el teléfono. No contestas, y esa persona busca a otro.", fix:"Reserva sola, sin llamarte."},
+      {title:"Turnos repetidos", hurt:"Dos clientes con la misma hora, una libreta tachada, una discusión en la puerta.", fix:"Una hora tomada desaparece para todos."},
+      {title:"Horas perdidas en mensajes", hurt:"“¿Tienes hora hoy?” “¿Y mañana?” Respondes lo mismo todo el día.", fix:"Tus clientes ven tus horas libres sin preguntarte."},
+      {title:"Clientes de noche", hurt:"Quien quiere reservar a las 11 de la noche no te encuentra, y mañana ya eligió a otro.", fix:"Tu agenda está abierta las 24 horas."}
+    ],
+    howEyebrow:"Cómo funciona", howTitle:"Tres pasos y tu agenda queda abierta.",
+    steps:[
+      {label:"PASO 1", title:"Configuras tu horario", text:"Entras a tu panel y marcas los días que trabajas, tus horas y cuánto dura cada servicio. También bloqueas el almuerzo o un día libre."},
+      {label:"PASO 2", title:"Compartes tu enlace", text:"Recibes una dirección con el nombre de tu negocio. La pones en tu Instagram, tu WhatsApp o en un cartel con código QR."},
+      {label:"PASO 3", title:"El cliente reserva solo", text:"Elige una hora libre y deja su nombre y teléfono. Esa hora desaparece para los demás y la cita aparece al instante en tu panel."}
+    ],
+    todayTitle:"Citas de hoy", client:"Cliente de ejemplo", svcCut:"Corte", svcCutBeard:"Corte y barba", lunchBlocked:"Almuerzo (bloqueado)",
+    panelEyebrow:"Tu panel privado", panelTitle:"Ves el día completo desde el teléfono.",
+    panelText:"Entras con tu usuario y contraseña. Ves quién viene, a qué hora y para qué servicio. Si alguien cancela, la hora vuelve a quedar libre y otro cliente puede tomarla.",
+    typesTitle:"Sirve para cualquier negocio que trabaja con turnos.",
+    types:["Barberías","Salones de belleza","Uñas y estética","Tatuajes","Talleres","Consultas y clínicas","Clases y entrenadores","Todo lo que lleve citas"],
+    priceEyebrow:"Precio", priceTitle:"3 días gratis. Después, una cuota fija.",
+    priceText:"Incluye tu página, tu panel privado y tu enlace propio. Sin contratos: cancelas cuando quieras.", perMonth:"USD / mes",
+    contactTitle:"Hoy tu teléfono volverá a sonar mientras trabajas.", contactText:"Cada día sin agenda en línea, otro cliente reserva con quien sí la tiene. Empieza hoy: 3 días gratis.",
+    footer:"Agenda en línea para negocios"
+  },
+  en: {
+    navHow:"How it works", navPain:"What you lose", navPrice:"Pricing", navCta:"Get my booking page",
+    eyebrow:"Online booking for any business", heroTitle:"Every call you miss is a customer who goes to someone else.",
+    heroText:"You can't answer the phone while you work. Millon Reserv keeps your calendar open 24 hours: customers see your open times and book on their own, even when you're busy or closed.",
+    ctaTrial:"Start today, 3 days free", ctaHow:"See how it works",
+    demoName:"Demo Barbershop", demoDay:"Thursday 12 · Classic cut · 45 min", example:"Example",
+    free:"Open", chosen:"Your pick", busy:"Taken", lunch:"Lunch", picked:"Selected", booked:"Booked",
+    tapHint:"Tap an open time to book.", formIntro:"Thursday 12 at {time}. Enter your details:",
+    namePh:"Your name", phonePh:"📞 Your phone", errMissing:"Your name and phone are missing.", confirmBtn:"Confirm appointment",
+    doneTitle:"Done ✅ Booked", doneText:"{name}, your appointment is Thursday 12 at {time}.", again:"Try again",
+    stats:[
+      {num:"82%", text:"of consumers say they would call a competitor after an unanswered call.", src:"CallRail survey, 2025"},
+      {num:"67%", text:"prefer to book appointments online rather than call.", src:"GetApp, 2024"},
+      {num:"40%", text:"of online bookings happen outside business hours.", src:"SimplyBook.me, 2025"}
+    ],
+    painEyebrow:"What it costs you today", painTitle:"Every day without online booking, you lose customers without knowing it.", fixLabel:"With Millon Reserv",
+    pains:[
+      {title:"Missed calls", hurt:"Your hands are busy and the phone rings. You don't answer, and that person finds someone else.", fix:"They book on their own, without calling you."},
+      {title:"Double bookings", hurt:"Two customers with the same time, a crossed-out notebook, an argument at the door.", fix:"A taken time disappears for everyone."},
+      {title:"Hours lost to messages", hurt:"“Do you have time today?” “And tomorrow?” You answer the same thing all day.", fix:"Customers see your open times without asking you."},
+      {title:"Night-time customers", hurt:"Someone who wants to book at 11 pm can't reach you, and by morning they've chosen someone else.", fix:"Your calendar is open 24 hours."}
+    ],
+    howEyebrow:"How it works", howTitle:"Three steps and your calendar is open.",
+    steps:[
+      {label:"STEP 1", title:"Set your hours", text:"Open your dashboard and mark the days you work, your hours and how long each service takes. You can also block lunch or a day off."},
+      {label:"STEP 2", title:"Share your link", text:"You get an address with your business name. Put it on your Instagram, your WhatsApp or a poster with a QR code."},
+      {label:"STEP 3", title:"Customers book on their own", text:"They pick an open time and leave their name and phone. That time disappears for everyone else and the booking shows up in your dashboard instantly."}
+    ],
+    todayTitle:"Today's appointments", client:"Sample client", svcCut:"Haircut", svcCutBeard:"Cut and beard", lunchBlocked:"Lunch (blocked)",
+    panelEyebrow:"Your private dashboard", panelTitle:"See the whole day from your phone.",
+    panelText:"Log in with your username and password. See who is coming, when and for which service. If someone cancels, the time opens up again and another customer can take it.",
+    typesTitle:"Works for any business that runs on appointments.",
+    types:["Barbershops","Beauty salons","Nails and aesthetics","Tattoo studios","Workshops","Clinics and consultations","Classes and trainers","Anything with appointments"],
+    priceEyebrow:"Pricing", priceTitle:"3 days free. Then one flat fee.",
+    priceText:"Includes your page, your private dashboard and your own link. No contracts: cancel anytime.", perMonth:"USD / month",
+    contactTitle:"Today your phone will ring again while you work.", contactText:"Every day without online booking, another customer books with someone who has it. Start today: 3 days free.",
+    footer:"Online booking for businesses"
+  },
+  pt: {
+    navHow:"Como funciona", navPain:"O que você perde", navPrice:"Preço", navCta:"Quero minha agenda",
+    eyebrow:"Agenda online para qualquer negócio", heroTitle:"Cada ligação que você não atende é um cliente que vai para outro.",
+    heroText:"Enquanto trabalha, você não consegue atender o telefone. O Millon Reserv abre sua agenda 24 horas: seus clientes veem seus horários livres e reservam sozinhos, mesmo com você ocupado ou fechado.",
+    ctaTrial:"Comece hoje, 3 dias grátis", ctaHow:"Ver como funciona",
+    demoName:"Barbearia Demo", demoDay:"Quinta 12 · Corte clássico · 45 min", example:"Exemplo",
+    free:"Livre", chosen:"Sua escolha", busy:"Ocupado", lunch:"Almoço", picked:"Escolhido", booked:"Agendado",
+    tapHint:"Toque em um horário livre para reservar.", formIntro:"Quinta 12 às {time}. Preencha seus dados:",
+    namePh:"Seu nome", phonePh:"📞 Seu telefone", errMissing:"Faltam seu nome e telefone.", confirmBtn:"Confirmar horário",
+    doneTitle:"Pronto ✅ Agendado", doneText:"{name}, seu horário é quinta 12 às {time}.", again:"Testar de novo",
+    stats:[
+      {num:"82%", text:"dos consumidores dizem que ligariam para a concorrência se ninguém atender.", src:"CallRail, pesquisa 2025"},
+      {num:"67%", text:"preferem reservar online em vez de ligar.", src:"GetApp, 2024"},
+      {num:"40%", text:"das reservas online acontecem fora do horário comercial.", src:"SimplyBook.me, 2025"}
+    ],
+    painEyebrow:"O que isso te custa hoje", painTitle:"Cada dia sem agenda online, você perde clientes sem perceber.", fixLabel:"Com o Millon Reserv",
+    pains:[
+      {title:"Ligações perdidas", hurt:"Suas mãos estão ocupadas e o telefone toca. Você não atende, e essa pessoa procura outro.", fix:"Ela reserva sozinha, sem ligar."},
+      {title:"Horários duplicados", hurt:"Dois clientes no mesmo horário, um caderno riscado, uma discussão na porta.", fix:"Um horário ocupado some para todos."},
+      {title:"Horas perdidas em mensagens", hurt:"“Tem horário hoje?” “E amanhã?” Você responde a mesma coisa o dia todo.", fix:"Os clientes veem seus horários livres sem perguntar."},
+      {title:"Clientes à noite", hurt:"Quem quer reservar às 23h não te encontra, e de manhã já escolheu outro.", fix:"Sua agenda fica aberta 24 horas."}
+    ],
+    howEyebrow:"Como funciona", howTitle:"Três passos e sua agenda está aberta.",
+    steps:[
+      {label:"PASSO 1", title:"Configure seu horário", text:"Entre no painel e marque os dias que você trabalha, seus horários e quanto dura cada serviço. Também dá para bloquear o almoço ou um dia de folga."},
+      {label:"PASSO 2", title:"Compartilhe seu link", text:"Você recebe um endereço com o nome do seu negócio. Coloque no Instagram, no WhatsApp ou em um cartaz com QR code."},
+      {label:"PASSO 3", title:"O cliente reserva sozinho", text:"Ele escolhe um horário livre e deixa nome e telefone. Esse horário some para os outros e o agendamento aparece na hora no seu painel."}
+    ],
+    todayTitle:"Agendamentos de hoje", client:"Cliente de exemplo", svcCut:"Corte", svcCutBeard:"Corte e barba", lunchBlocked:"Almoço (bloqueado)",
+    panelEyebrow:"Seu painel privado", panelTitle:"Veja o dia inteiro pelo celular.",
+    panelText:"Entre com usuário e senha. Veja quem vem, a que horas e para qual serviço. Se alguém cancelar, o horário volta a ficar livre e outro cliente pode pegar.",
+    typesTitle:"Serve para qualquer negócio que trabalha com horário marcado.",
+    types:["Barbearias","Salões de beleza","Unhas e estética","Tatuagem","Oficinas","Consultas e clínicas","Aulas e treinadores","Tudo que tenha horário marcado"],
+    priceEyebrow:"Preço", priceTitle:"3 dias grátis. Depois, uma mensalidade fixa.",
+    priceText:"Inclui sua página, seu painel privado e seu link próprio. Sem contrato: cancele quando quiser.", perMonth:"USD / mês",
+    contactTitle:"Hoje seu telefone vai tocar de novo enquanto você trabalha.", contactText:"Cada dia sem agenda online, outro cliente reserva com quem tem. Comece hoje: 3 dias grátis.",
+    footer:"Agenda online para negócios"
+  },
+  fr: {
+    navHow:"Comment ça marche", navPain:"Ce que vous perdez", navPrice:"Tarif", navCta:"Je veux mon agenda",
+    eyebrow:"Réservation en ligne pour tout commerce", heroTitle:"Chaque appel manqué est un client qui part chez un autre.",
+    heroText:"Quand vous travaillez, vous ne pouvez pas répondre au téléphone. Millon Reserv ouvre votre agenda 24 h sur 24 : vos clients voient vos créneaux libres et réservent seuls, même quand vous êtes occupé ou fermé.",
+    ctaTrial:"Commencez aujourd'hui, 3 jours gratuits", ctaHow:"Voir comment ça marche",
+    demoName:"Salon de coiffure Démo", demoDay:"Jeudi 12 · Coupe classique · 45 min", example:"Exemple",
+    free:"Libre", chosen:"Votre choix", busy:"Pris", lunch:"Pause", picked:"Choisi", booked:"Réservé",
+    tapHint:"Touchez un créneau libre pour réserver.", formIntro:"Jeudi 12 à {time}. Indiquez vos coordonnées :",
+    namePh:"Votre nom", phonePh:"📞 Votre téléphone", errMissing:"Il manque votre nom et votre téléphone.", confirmBtn:"Confirmer le rendez-vous",
+    doneTitle:"C'est fait ✅ Réservé", doneText:"{name}, votre rendez-vous est jeudi 12 à {time}.", again:"Réessayer",
+    stats:[
+      {num:"82 %", text:"des consommateurs disent qu'ils appelleraient un concurrent si personne ne répond.", src:"CallRail, enquête 2025"},
+      {num:"67 %", text:"préfèrent réserver en ligne plutôt qu'appeler.", src:"GetApp, 2024"},
+      {num:"40 %", text:"des réservations en ligne se font en dehors des heures d'ouverture.", src:"SimplyBook.me, 2025"}
+    ],
+    painEyebrow:"Ce que cela vous coûte aujourd'hui", painTitle:"Chaque jour sans réservation en ligne, vous perdez des clients sans le savoir.", fixLabel:"Avec Millon Reserv",
+    pains:[
+      {title:"Appels manqués", hurt:"Vous avez les mains prises et le téléphone sonne. Vous ne répondez pas, et cette personne va voir ailleurs.", fix:"Elle réserve seule, sans vous appeler."},
+      {title:"Doubles réservations", hurt:"Deux clients au même créneau, un carnet raturé, une dispute à la porte.", fix:"Un créneau pris disparaît pour tout le monde."},
+      {title:"Heures perdues en messages", hurt:"« Vous avez une place aujourd'hui ? » « Et demain ? » Vous répondez la même chose toute la journée.", fix:"Les clients voient vos créneaux libres sans vous demander."},
+      {title:"Clients du soir", hurt:"Celui qui veut réserver à 23 h ne vous trouve pas, et le lendemain il a choisi quelqu'un d'autre.", fix:"Votre agenda est ouvert 24 h sur 24."}
+    ],
+    howEyebrow:"Comment ça marche", howTitle:"Trois étapes et votre agenda est ouvert.",
+    steps:[
+      {label:"ÉTAPE 1", title:"Réglez vos horaires", text:"Ouvrez votre tableau de bord et indiquez vos jours de travail, vos heures et la durée de chaque service. Vous pouvez aussi bloquer la pause déjeuner ou un jour de congé."},
+      {label:"ÉTAPE 2", title:"Partagez votre lien", text:"Vous recevez une adresse au nom de votre commerce. Placez-la sur Instagram, WhatsApp ou sur une affiche avec un QR code."},
+      {label:"ÉTAPE 3", title:"Le client réserve seul", text:"Il choisit un créneau libre et laisse son nom et son téléphone. Ce créneau disparaît pour les autres et le rendez-vous apparaît aussitôt dans votre tableau de bord."}
+    ],
+    todayTitle:"Rendez-vous du jour", client:"Client exemple", svcCut:"Coupe", svcCutBeard:"Coupe et barbe", lunchBlocked:"Pause déjeuner (bloqué)",
+    panelEyebrow:"Votre tableau de bord privé", panelTitle:"Voyez toute la journée depuis votre téléphone.",
+    panelText:"Connectez-vous avec votre identifiant et votre mot de passe. Voyez qui vient, à quelle heure et pour quel service. Si quelqu'un annule, le créneau redevient libre pour un autre client.",
+    typesTitle:"Pour tout commerce qui fonctionne sur rendez-vous.",
+    types:["Barbiers","Salons de beauté","Ongles et esthétique","Tatouage","Garages et ateliers","Consultations et cabinets","Cours et coachs","Tout ce qui prend des rendez-vous"],
+    priceEyebrow:"Tarif", priceTitle:"3 jours gratuits. Ensuite, un tarif fixe.",
+    priceText:"Comprend votre page, votre tableau de bord privé et votre propre lien. Sans engagement : annulez quand vous voulez.", perMonth:"USD / mois",
+    contactTitle:"Aujourd'hui, votre téléphone sonnera encore pendant que vous travaillez.", contactText:"Chaque jour sans réservation en ligne, un autre client réserve chez quelqu'un qui en a une. Commencez aujourd'hui : 3 jours gratuits.",
+    footer:"Réservation en ligne pour commerces"
+  },
+  it: {
+    navHow:"Come funziona", navPain:"Cosa perdi", navPrice:"Prezzo", navCta:"Voglio la mia agenda",
+    eyebrow:"Prenotazioni online per ogni attività", heroTitle:"Ogni chiamata a cui non rispondi è un cliente che va da un altro.",
+    heroText:"Mentre lavori non puoi rispondere al telefono. Millon Reserv tiene la tua agenda aperta 24 ore su 24: i clienti vedono i tuoi orari liberi e prenotano da soli, anche quando sei occupato o chiuso.",
+    ctaTrial:"Inizia oggi, 3 giorni gratis", ctaHow:"Scopri come funziona",
+    demoName:"Barbiere Demo", demoDay:"Giovedì 12 · Taglio classico · 45 min", example:"Esempio",
+    free:"Libero", chosen:"La tua scelta", busy:"Occupato", lunch:"Pranzo", picked:"Scelto", booked:"Prenotato",
+    tapHint:"Tocca un orario libero per prenotare.", formIntro:"Giovedì 12 alle {time}. Inserisci i tuoi dati:",
+    namePh:"Il tuo nome", phonePh:"📞 Il tuo telefono", errMissing:"Mancano il tuo nome e il telefono.", confirmBtn:"Conferma appuntamento",
+    doneTitle:"Fatto ✅ Prenotato", doneText:"{name}, il tuo appuntamento è giovedì 12 alle {time}.", again:"Riprova",
+    stats:[
+      {num:"82%", text:"dei consumatori dice che chiamerebbe un concorrente se nessuno risponde.", src:"CallRail, sondaggio 2025"},
+      {num:"67%", text:"preferisce prenotare online invece di telefonare.", src:"GetApp, 2024"},
+      {num:"40%", text:"delle prenotazioni online avviene fuori dall'orario di apertura.", src:"SimplyBook.me, 2025"}
+    ],
+    painEyebrow:"Quanto ti costa oggi", painTitle:"Ogni giorno senza prenotazioni online perdi clienti senza accorgertene.", fixLabel:"Con Millon Reserv",
+    pains:[
+      {title:"Chiamate perse", hurt:"Hai le mani occupate e il telefono squilla. Non rispondi, e quella persona cerca un altro.", fix:"Prenota da sola, senza chiamarti."},
+      {title:"Orari doppi", hurt:"Due clienti alla stessa ora, un quaderno pieno di cancellature, una discussione alla porta.", fix:"Un orario occupato sparisce per tutti."},
+      {title:"Ore perse in messaggi", hurt:"«Hai posto oggi?» «E domani?» Rispondi la stessa cosa tutto il giorno.", fix:"I clienti vedono i tuoi orari liberi senza chiedertelo."},
+      {title:"Clienti di sera", hurt:"Chi vuole prenotare alle 23 non ti trova, e il giorno dopo ha già scelto un altro.", fix:"La tua agenda è aperta 24 ore su 24."}
+    ],
+    howEyebrow:"Come funziona", howTitle:"Tre passi e la tua agenda è aperta.",
+    steps:[
+      {label:"PASSO 1", title:"Imposta i tuoi orari", text:"Apri il pannello e segna i giorni in cui lavori, gli orari e la durata di ogni servizio. Puoi anche bloccare il pranzo o un giorno libero."},
+      {label:"PASSO 2", title:"Condividi il tuo link", text:"Ricevi un indirizzo con il nome della tua attività. Mettilo su Instagram, su WhatsApp o su un cartello con QR code."},
+      {label:"PASSO 3", title:"Il cliente prenota da solo", text:"Sceglie un orario libero e lascia nome e telefono. Quell'orario sparisce per gli altri e la prenotazione appare subito nel tuo pannello."}
+    ],
+    todayTitle:"Appuntamenti di oggi", client:"Cliente di esempio", svcCut:"Taglio", svcCutBeard:"Taglio e barba", lunchBlocked:"Pranzo (bloccato)",
+    panelEyebrow:"Il tuo pannello privato", panelTitle:"Vedi tutta la giornata dal telefono.",
+    panelText:"Accedi con nome utente e password. Vedi chi viene, a che ora e per quale servizio. Se qualcuno disdice, l'orario torna libero e un altro cliente può prenderlo.",
+    typesTitle:"Va bene per ogni attività che lavora su appuntamento.",
+    types:["Barbieri","Saloni di bellezza","Unghie ed estetica","Tatuaggi","Officine","Visite e studi","Corsi e personal trainer","Tutto ciò che prevede appuntamenti"],
+    priceEyebrow:"Prezzo", priceTitle:"3 giorni gratis. Poi un canone fisso.",
+    priceText:"Include la tua pagina, il tuo pannello privato e il tuo link personale. Nessun contratto: disdici quando vuoi.", perMonth:"USD / mese",
+    contactTitle:"Oggi il tuo telefono squillerà ancora mentre lavori.", contactText:"Ogni giorno senza prenotazioni online, un altro cliente prenota da chi le ha. Inizia oggi: 3 giorni gratis.",
+    footer:"Prenotazioni online per attività"
+  }
+};
+
+var SEAL = { es:["3","días gratis"], en:["3","days free"], pt:["3","dias grátis"], fr:["3","jours gratuits"], it:["3","giorni gratis"] };
+var ROMAN = ["01","02","03","04","05"];
+var LANGS = [["es","ES","Español"],["en","EN","English"],["pt","PT","Português"],["fr","FR","Français"],["it","IT","Italiano"]];
+var DATA = [["9:00","free"],["9:45","busy"],["10:30","free"],["11:15","busy"],["12:00","free"],["12:45","block"],["14:00","free"],["14:45","busy"],["15:30","free"]];
+var state = { lang:"es", sel:null, done:false, err:"" };
+
+function $(id){ return document.getElementById(id); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+try {
+  var saved = localStorage.getItem("millon-lang");
+  var nav = (navigator.language || "es").slice(0,2).toLowerCase();
+  state.lang = T[saved] ? saved : (T[nav] ? nav : "es");
+} catch (e) {
+  var nav2 = (navigator.language || "es").slice(0,2).toLowerCase();
+  state.lang = T[nav2] ? nav2 : "es";
+}
+
+
+function hotWords(){
+  document.querySelectorAll("h1, h2").forEach(function(el){
+    var n = el.tagName === "H1" ? 3 : 2;
+    var words = el.textContent.trim().split(/\s+/);
+    if (words.length <= n + 1) return;
+    el.innerHTML = esc(words.slice(0, -n).join(" ")) + ' <span class="hot">' + esc(words.slice(-n).join(" ")) + '</span>';
+  });
+}
+
+function renderStatic(){
+  var t = T[state.lang];
+  document.documentElement.lang = state.lang;
+  document.querySelectorAll("[data-i18n]").forEach(function(el){ var v = t[el.getAttribute("data-i18n")]; if (v != null) el.textContent = v; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function(el){ el.placeholder = t[el.getAttribute("data-i18n-ph")]; });
+  document.querySelectorAll("[data-i18n-aria]").forEach(function(el){ el.setAttribute("aria-label", t[el.getAttribute("data-i18n-aria")]); });
+  $("stats").innerHTML = t.stats.map(function(s){
+    return '<div class="glass stat"><div class="num">'+esc(s.num)+'</div><div class="tx">'+esc(s.text)+'</div><div class="src">'+esc(s.src)+'</div></div>';
+  }).join("");
+  $("pains").innerHTML = t.pains.map(function(p){
+    return '<div class="glass plaque"><h3>'+esc(p.title)+'</h3><p>'+esc(p.hurt)+'</p><div class="fix"><div class="lb">'+esc(t.fixLabel)+'</div><div class="tx">'+esc(p.fix)+'</div></div></div>';
+  }).join("");
+  $("steps").innerHTML = t.steps.map(function(s, i){
+    var word = s.label.replace(/\s*\d+\s*/, "");
+    return '<div class="glass step"><div class="rn">'+ROMAN[i]+'</div><div class="lb">'+esc(word)+' '+(i+1)+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p></div>';
+  }).join("");
+  $("types").innerHTML = t.types.map(function(n){ return "<span>"+esc(n)+"</span>"; }).join("");
+  var sl = SEAL[state.lang]; $("sealN").textContent = sl[0]; $("sealT").textContent = sl[1];
+  $("langs").innerHTML = "";
+  LANGS.forEach(function(l){
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = l[1]; b.setAttribute("aria-label", l[2]);
+    b.setAttribute("aria-pressed", state.lang === l[0] ? "true" : "false");
+    b.onclick = function(){
+      state.lang = l[0];
+      try { localStorage.setItem("millon-lang", l[0]); } catch (e) {}
+      state.err = "";
+      renderStatic(); hotWords(); renderDemo();
+    };
+    $("langs").appendChild(b);
+  });
+  var cb = $("contactBtn");
+  if (CONTACT.url) { cb.href = CONTACT.url; cb.textContent = CONTACT.label || CONTACT.url; cb.hidden = false; } else { cb.hidden = true; }
+}
+
+function renderDemo(){
+  var t = T[state.lang];
+  var box = $("slots"); box.innerHTML = "";
+  DATA.forEach(function(d){
+    var time = d[0], st = d[1];
+    var b = document.createElement("button");
+    b.type = "button";
+    var label;
+    if (st === "free") {
+      var on = state.sel === time;
+      b.className = "slot" + (on ? " chosen" : "");
+      label = on ? (state.done ? t.booked : t.picked) : t.free;
+      b.onclick = function(){ if (!state.done) { state.sel = time; state.err = ""; renderDemo(); } };
+    } else if (st === "busy") {
+      b.className = "slot busy"; label = t.busy; b.disabled = true;
+    } else {
+      b.className = "slot lunch"; label = t.lunch; b.disabled = true;
+    }
+    b.innerHTML = "<b>"+time+"</b><small>"+esc(label)+"</small>";
+    box.appendChild(b);
+  });
+  var name = $("cli-nombre").value, sel = state.sel;
+  $("hint").hidden = !!sel;
+  $("form").hidden = !sel || state.done;
+  $("done").hidden = !state.done;
+  $("formIntro").textContent = t.formIntro.replace("{time}", sel || "");
+  $("err").textContent = state.err;
+  $("doneText").textContent = t.doneText.replace("{name}", name).replace("{time}", sel || "");
+}
+
+$("confirm").onclick = function(){
+  var t = T[state.lang];
+  if (!$("cli-nombre").value.trim() || !$("cli-telefono").value.trim()) { state.err = t.errMissing; renderDemo(); return; }
+  state.done = true; state.err = ""; renderDemo();
+};
+$("again").onclick = function(){
+  state.sel = null; state.done = false; state.err = "";
+  $("cli-nombre").value = ""; $("cli-telefono").value = "";
+  renderDemo();
+};
+
+renderStatic(); hotWords();
+renderDemo();
+
+
+/* ===== luces flotantes ===== */
+(function(){
+  var cv = $("motes"); if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var W, H, DPR;
+  function size(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  size(); window.addEventListener("resize", size);
+  var spr = document.createElement("canvas"); spr.width = spr.height = 48;
+  var sc = spr.getContext("2d"), g = sc.createRadialGradient(24,24,0,24,24,24);
+  g.addColorStop(0, "rgba(245,250,255,1)"); g.addColorStop(0.25, "rgba(170,205,255,.9)");
+  g.addColorStop(0.6, "rgba(80,130,255,.3)"); g.addColorStop(1, "rgba(60,110,255,0)");
+  sc.fillStyle = g; sc.fillRect(0,0,48,48);
+  function mk(init){
+    return { x: Math.random()*W, y: init ? Math.random()*H : H + 12,
+      vx: (Math.random()-.5)*.25, vy: -(0.15 + Math.random()*.55),
+      r: 4 + Math.random()*10, ph: Math.random()*6.28, a: .25 + Math.random()*.6, f: .5 + Math.random()*.7 };
+  }
+  var N = W < 700 ? 26 : 56, ps = [];
+  for (var i = 0; i < N; i++) ps.push(mk(true));
+  function frame(){
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < ps.length; i++){
+      var p = ps[i];
+      p.ph += 0.02 * p.f;
+      p.x += p.vx + Math.sin(p.ph) * .3;
+      p.y += p.vy;
+      if (p.y < -20) { ps[i] = mk(false); continue; }
+      var fl = .65 + .35 * Math.sin(p.ph * 2.3);
+      ctx.globalAlpha = p.a * fl * .7;
+      var s = p.r * 2;
+      ctx.drawImage(spr, p.x - s/2, p.y - s/2, s, s);
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* ===== medusa (canvas con fisica) ===== */
+(function(){
+  var cv = $("jelly"); if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var W, H, DPR, S, mobile;
+  function size(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    mobile = W < 760;
+    S = mobile ? W * 0.27 : Math.min(W * 0.15, 235);
+  }
+  size(); window.addEventListener("resize", size);
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+  var J = { x: W*0.7, y: H*0.27, vx: 0, vy: 0, ph: 0, tilt: 0 };
+  var mouse = { x: .7 }, sv = 0, lastY = window.pageYOffset || 0, t = 0;
+  window.addEventListener("mousemove", function(e){ mouse.x = e.clientX / W; }, { passive:true });
+  window.addEventListener("scroll", function(){
+    var y = window.pageYOffset; sv += (y - lastY); lastY = y;
+  }, { passive:true });
+
+  function mkChain(a, n, seg, w, kind){
+    var c = { a:a, n:n, seg:seg, w:w, kind:kind, ph:rnd(0,6.28), pts:[] };
+    for (var i = 0; i < n; i++) c.pts.push({ x:J.x + a*S, y:J.y + S*.2 + i*seg, px:J.x + a*S, py:J.y + S*.2 + i*seg });
+    return c;
+  }
+  var tent = [], arms = [];
+  for (var i = 0; i < 24; i++){
+    var a = -0.94 + 1.88 * i/23 + rnd(-.02,.02);
+    tent.push(mkChain(a, 20, S*rnd(.075,.115), rnd(1.1,1.9), i % 6 === 2 ? "red" : "blue"));
+  }
+  [-.36,-.12,.12,.36].forEach(function(a){ arms.push(mkChain(a, 15, S*.1, rnd(9,14), "arm")); });
+  function rescale(){ tent.forEach(function(c){ c.seg = S*rnd(.075,.115); }); arms.forEach(function(c){ c.seg = S*.1; }); }
+  rescale(); window.addEventListener("resize", rescale);
+
+  function update(c, bx, by, wind){
+    var P = c.pts;
+    P[0].x = bx + c.a * S * J.bw; P[0].y = by + S*.04; P[0].px = P[0].x; P[0].py = P[0].y;
+    for (var i = 1; i < P.length; i++){
+      var p = P[i], vx = (p.x - p.px) * .978, vy = (p.y - p.py) * .978;
+      p.px = p.x; p.py = p.y;
+      var k = i / P.length;
+      p.x += vx + (Math.sin(t*1.1 + i*.3 + c.ph) * .55 + Math.sin(t*.6 + i*.12 + c.ph*2) * .35) * k * (S/120) + wind.x * k;
+      p.y += vy + .05 * (S/120) + wind.y * k;
+    }
+    for (var it = 0; it < 4; it++){
+      for (var j = 1; j < P.length; j++){
+        var A = P[j-1], B = P[j], dx = B.x - A.x, dy = B.y - A.y, d = Math.sqrt(dx*dx + dy*dy) || 1;
+        var diff = (d - c.seg) / d;
+        if (j === 1){ B.x -= dx*diff; B.y -= dy*diff; }
+        else { A.x += dx*diff*.5; A.y += dy*diff*.5; B.x -= dx*diff*.5; B.y -= dy*diff*.5; }
+      }
+      P[0].x = bx + c.a * S * J.bw; P[0].y = by + S*.04;
+    }
+    for (var m = 1; m < P.length - 1; m++){
+      P[m].x += ((P[m-1].x + P[m+1].x)/2 - P[m].x) * .35;
+      P[m].y += ((P[m-1].y + P[m+1].y)/2 - P[m].y) * .35;
+    }
+  }
+
+  function drawChain(c, alpha){
+    var P = c.pts, n = P.length, i;
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
+    for (i = 1; i < n - 1; i++){
+      var k = i / n, f = Math.pow(1 - k, 1.15);
+      var m0x = (P[i-1].x + P[i].x)/2, m0y = (P[i-1].y + P[i].y)/2;
+      var m1x = (P[i].x + P[i+1].x)/2, m1y = (P[i].y + P[i+1].y)/2;
+      var col = c.kind === "red" ? "255,80,100" : (k < .45 ? "214,232,255" : "110,160,255");
+      if (c.kind === "arm"){
+        ctx.strokeStyle = "rgba(130,180,255," + (alpha*.2*f).toFixed(3) + ")";
+        ctx.lineWidth = c.w * (1 - k*.8) * 2.4;
+        ctx.beginPath(); ctx.moveTo(m0x, m0y); ctx.quadraticCurveTo(P[i].x, P[i].y, m1x, m1y); ctx.stroke();
+        ctx.strokeStyle = "rgba(235,245,255," + (alpha*.5*f).toFixed(3) + ")";
+        ctx.lineWidth = Math.max(.8, c.w * (1 - k) * .3);
+        ctx.beginPath(); ctx.moveTo(m0x, m0y); ctx.quadraticCurveTo(P[i].x, P[i].y, m1x, m1y); ctx.stroke();
+      } else {
+        ctx.strokeStyle = "rgba(" + col + "," + (alpha*.10*f).toFixed(3) + ")";
+        ctx.lineWidth = c.w * 4.4 * (1 - k*.6);
+        ctx.beginPath(); ctx.moveTo(m0x, m0y); ctx.quadraticCurveTo(P[i].x, P[i].y, m1x, m1y); ctx.stroke();
+        ctx.strokeStyle = "rgba(" + col + "," + (alpha*.62*f).toFixed(3) + ")";
+        ctx.lineWidth = c.w * (1 - k*.7) * (S/170);
+        ctx.beginPath(); ctx.moveTo(m0x, m0y); ctx.quadraticCurveTo(P[i].x, P[i].y, m1x, m1y); ctx.stroke();
+      }
+    }
+  }
+
+  function bellPath(sx, sy){
+    ctx.beginPath();
+    var i, N = 48;
+    for (i = 0; i <= N; i++){
+      var a = Math.PI * i / N, x = Math.cos(a) * sx, y = -Math.pow(Math.sin(a), .72) * sy + S*.11*Math.pow(Math.cos(a), 2);
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    for (i = 0; i <= 60; i++){
+      var u = i / 60, bx = -sx + 2*sx*u, e = Math.sin(u*Math.PI);
+      var by = S*.11*(1 - .8*e) + Math.sin(u*46 + t*3) * S*.02 * Math.pow(e,.6);
+      ctx.lineTo(bx, by);
+    }
+    ctx.closePath();
+  }
+
+  function drawBell(alpha, c){
+    var sx = S * J.bw, sy = S * .95 * J.bh;
+    ctx.save();
+    ctx.translate(J.x, J.y); ctx.rotate(J.tilt);
+    ctx.globalCompositeOperation = "lighter";
+    /* resplandor externo */
+    bellPath(sx, sy);
+    ctx.shadowColor = "rgba(90,150,255," + (.75*alpha).toFixed(2) + ")"; ctx.shadowBlur = S*.55;
+    ctx.fillStyle = "rgba(80,130,255," + (.10*alpha).toFixed(3) + ")"; ctx.fill();
+    ctx.shadowBlur = 0; ctx.shadowColor = "transparent";
+    /* cuerpo translucido */
+    bellPath(sx, sy); ctx.save(); ctx.clip();
+    var g = ctx.createRadialGradient(-sx*.15, -sy*.62, 0, 0, -sy*.25, sx*1.25);
+    g.addColorStop(0, "rgba(245,250,255," + (.78*alpha) + ")");
+    g.addColorStop(.2, "rgba(190,215,255," + (.52*alpha) + ")");
+    g.addColorStop(.55, "rgba(80,135,255," + (.26*alpha) + ")");
+    g.addColorStop(1, "rgba(25,55,170," + (.36*alpha) + ")");
+    ctx.fillStyle = g; ctx.fillRect(-sx*1.3, -sy*1.3, sx*2.6, sy*1.6);
+    /* canales radiales */
+    ctx.lineWidth = 1; 
+    for (var r = -8; r <= 8; r++){
+      var tx = r * sx / 8.6;
+      ctx.strokeStyle = "rgba(225,238,255," + (.20*alpha) + ")";
+      ctx.beginPath(); ctx.moveTo(0, -sy*.98);
+      ctx.quadraticCurveTo(tx*.55, -sy*.55, tx, 0); ctx.stroke();
+    }
+    /* gonadas: cuatro lobulos suaves en anillo */
+    for (var q = 0; q < 4; q++){
+      var ang = q * Math.PI/2 + Math.PI/4 + t*.15;
+      var gx = Math.cos(ang) * S*.2*J.bw, gy = -sy*.36 + Math.sin(ang) * S*.075;
+      var lg = ctx.createRadialGradient(gx, gy, 0, gx, gy, S*.15);
+      lg.addColorStop(0, "rgba(255,230,236," + (.6*alpha) + ")");
+      lg.addColorStop(.5, "rgba(255,95,120," + (.3*alpha) + ")");
+      lg.addColorStop(1, "rgba(255,70,95,0)");
+      ctx.fillStyle = lg; ctx.beginPath(); ctx.arc(gx, gy, S*.15, 0, 6.29); ctx.fill();
+    }
+    var core = ctx.createRadialGradient(0, -sy*.34, 0, 0, -sy*.34, S*.6);
+    core.addColorStop(0, "rgba(255,255,255," + (.42*alpha) + ")"); core.addColorStop(1, "rgba(120,170,255,0)");
+    ctx.fillStyle = core; ctx.fillRect(-sx*1.3, -sy*1.3, sx*2.6, sy*1.6);
+    /* reflejos rojos en los bordes */
+    var rl = ctx.createRadialGradient(-sx*.78, sy*.02, 0, -sx*.78, sy*.02, S*.95);
+    rl.addColorStop(0, "rgba(255,55,80," + (.5*alpha) + ")"); rl.addColorStop(1, "rgba(255,55,80,0)");
+    ctx.fillStyle = rl; ctx.fillRect(-sx*1.3, -sy*1.3, sx*2.6, sy*1.6);
+    var rr = ctx.createRadialGradient(sx*.82, -sy*.12, 0, sx*.82, -sy*.12, S*.75);
+    rr.addColorStop(0, "rgba(255,70,95," + (.4*alpha) + ")"); rr.addColorStop(1, "rgba(255,70,95,0)");
+    ctx.fillStyle = rr; ctx.fillRect(-sx*1.3, -sy*1.3, sx*2.6, sy*1.6);
+    /* brillo especular */
+    ctx.save(); ctx.translate(-sx*.38, -sy*.66); ctx.rotate(-.55); ctx.scale(1, .32);
+    var sp = ctx.createRadialGradient(0,0,0,0,0,S*.5);
+    sp.addColorStop(0, "rgba(255,255,255," + (.7*alpha) + ")"); sp.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = sp; ctx.beginPath(); ctx.arc(0,0,S*.5,0,6.29); ctx.fill();
+    ctx.restore();
+    ctx.restore(); /* fin clip */
+    /* borde luminoso */
+    bellPath(sx, sy);
+    ctx.strokeStyle = "rgba(235,245,255," + (.6*alpha) + ")"; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(0, 0, sx*.98, sy*.97, 0, Math.PI*.05, Math.PI*.42, false);
+    ctx.strokeStyle = "rgba(255,70,95," + (.55*alpha) + ")"; ctx.lineWidth = 2.2; ctx.stroke();
+    ctx.restore();
+  }
+
+  function step(){
+    t += 1/60;
+    var doc = Math.max(1, document.documentElement.scrollHeight - H);
+    var p = clamp((window.pageYOffset||0) / doc, 0, 1);
+    var tx = mobile ? W*(.64 + Math.sin(p*9)*.06) : W*(.72 + Math.sin(p*9.4)*.09) + (mouse.x - .5) * W * .14;
+    var ty = H*(.31 + .46*p) + clamp(sv * 1.6, -70, 70);
+    tx = clamp(tx, S*1.1, W - S*1.1);
+    J.vx += (tx - J.x) * .012; J.vy += (ty - J.y) * .012;
+    J.vx *= .92; J.vy *= .92;
+    J.x += J.vx; J.y += J.vy;
+    J.tilt += (clamp(J.vx*.05, -.28, .28) - J.tilt) * .1;
+    var speed = 1 + Math.min(Math.abs(sv) * .05, 3.2);
+    J.ph += .045 * speed;
+    var c = .5 + .5*Math.sin(J.ph);
+    J.bw = 1 - .10*c; J.bh = 1 + .13*c;
+    sv *= .9;
+    J.alpha = clamp(1 - p*6, 0, 1)*.4 + .6;
+    if (mobile) J.alpha *= .38;
+    var wind = { x: -J.vx*.05, y: -J.vy*.035 };
+    var by = J.y;
+    for (var i = 0; i < tent.length; i++) update(tent[i], J.x, by, wind);
+    for (var k = 0; k < arms.length; k++) update(arms[k], J.x, by, wind);
+  }
+
+  function frame(){
+    step();
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "lighter";
+    for (var i = 0; i < tent.length; i++) drawChain(tent[i], J.alpha);
+    for (var k = 0; k < arms.length; k++) drawChain(arms[k], J.alpha);
+    drawBell(J.alpha);
+    ctx.globalCompositeOperation = "source-over";
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  if (reduce){ for (var w = 0; w < 160; w++) step(); }
+  frame();
+})();
+
+})();
+
+</script>
+</body>
+</html>
