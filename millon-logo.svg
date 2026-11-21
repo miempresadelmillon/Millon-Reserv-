@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<defs>
+<radialGradient id="bg" cx="50%" cy="55%" r="75%">
+<stop offset="0" stop-color="#0c1426"/>
+<stop offset="0.6" stop-color="#060a14"/>
+<stop offset="1" stop-color="#02040a"/>
+</radialGradient>
+<linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="120" y1="120" x2="904" y2="904">
+<stop offset="0" stop-color="#f4f8ff"/>
+<stop offset="0.35" stop-color="#a9bfdc"/>
+<stop offset="0.65" stop-color="#4a5f86"/>
+<stop offset="1" stop-color="#dbe7fb"/>
+</linearGradient>
+<linearGradient id="fire" gradientUnits="userSpaceOnUse" x1="0" y1="262" x2="0" y2="762">
+<stop offset="0" stop-color="#f5f9ff"/>
+<stop offset="0.28" stop-color="#a8c8ff"/>
+<stop offset="0.6" stop-color="#4f86ff"/>
+<stop offset="1" stop-color="#1c3a9e"/>
+</linearGradient>
+<radialGradient id="heat" cx="50%" cy="50%" r="50%">
+<stop offset="0" stop-color="#4f86ff" stop-opacity="0.55"/>
+<stop offset="1" stop-color="#2b5fe0" stop-opacity="0"/>
+</radialGradient>
+<filter id="blur" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="16"/></filter>
+<filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>
+<g id="m">
+<rect x="288" y="272" width="22" height="480"/>
+<rect x="716" y="272" width="22" height="480"/>
+<polygon points="288,272 356,272 538,752 480,752"/>
+<polygon points="738,272 716,272 484,752 540,752"/>
+<rect x="238" y="262" width="150" height="12"/>
+<rect x="666" y="262" width="150" height="12"/>
+<rect x="238" y="750" width="150" height="12"/>
+<rect x="666" y="750" width="150" height="12"/>
+</g>
+</defs>
+<rect width="1024" height="1024" fill="url(#bg)"/>
+<circle cx="512" cy="512" r="440" fill="none" stroke="url(#gold)" stroke-width="5"/>
+<circle cx="512" cy="512" r="420" fill="none" stroke="url(#gold)" stroke-width="1.6" opacity="0.6"/>
+<ellipse cx="512" cy="520" rx="320" ry="330" fill="url(#heat)"/>
+<use href="#m" transform="translate(-14,0)" fill="#5b9dff" filter="url(#blur)" opacity="0.85"/>
+<g fill="#7fb0ff" filter="url(#soft)" opacity="0.9" transform="translate(-14,0)">
+<path d="M296 262 C280 220 310 196 302 150 C338 186 352 226 332 262 Z"/>
+<path d="M706 262 C690 214 722 192 714 146 C750 182 764 222 744 262 Z"/>
+</g>
+<use href="#m" transform="translate(-14,0)" fill="url(#fire)"/>
+<g fill="#bcd8ff" filter="url(#soft)">
+<circle cx="230" cy="330" r="5"/><circle cx="800" cy="380" r="4"/><circle cx="204" cy="600" r="3.5"/>
+<circle cx="830" cy="640" r="5"/><circle cx="300" cy="840" r="4"/><circle cx="740" cy="840" r="3.5"/>
+<circle cx="420" cy="150" r="3.5"/><circle cx="620" cy="130" r="4.5"/><circle cx="160" cy="470" r="3"/>
+</g>
+<g fill="#c9d8ee">
+<polygon points="512,882 526,896 512,910 498,896"/>
+</g>
+</svg>

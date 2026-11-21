@@ -58,6 +58,8 @@ nav{position:sticky;top:max(12px,env(safe-area-inset-top,0px));z-index:30;displa
 .langs button{font:600 12px/1 "Inter Tight",system-ui,sans-serif;letter-spacing:.06em;color:var(--mute);background:none;border:0;border-radius:999px;padding:8px 9px;cursor:pointer}
 .langs button[aria-pressed="true"]{color:#06132a;background:linear-gradient(180deg,#f4f8ff,#9fc2ff)}
 .navcta{padding:12px 18px;font-size:15px}
+.navlogin{font-size:15px;color:var(--silver);text-decoration:none;padding:8px 10px}
+.navlogin:hover{color:#fff}
 
 /* ---------- hero ---------- */
 .hero{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.8fr);gap:40px;align-items:center;padding:64px 0 36px;min-height:740px}
@@ -182,13 +184,96 @@ footer b{color:var(--silver);font-weight:600}
   .appt .s{grid-column:2;justify-self:start}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ---------- app: reservas, panel, admin ---------- */
+.appmode #motes{opacity:.5}
+.app{max-width:760px;margin:0 auto;padding-bottom:40px}
+.apphead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0 18px}
+.bname{font-size:clamp(22px,5vw,32px);font-weight:600;letter-spacing:-.035em;background:linear-gradient(180deg,#fff 30%,#a9c8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.box{padding:22px;margin-bottom:14px}
+.box.center,.center{text-align:center}
+.stitle{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--red2);margin-bottom:14px;font-weight:600}
+.mute{color:var(--mute)} .small{font-size:14px}
+.bigok{font-size:26px;font-weight:600;letter-spacing:-.03em;margin-bottom:8px}
+.opts{display:grid;gap:8px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:15px 18px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);font:500 17px "Inter Tight",system-ui,sans-serif;cursor:pointer;text-align:left}
+.opt span{color:var(--mute);font-size:15px;white-space:nowrap}
+.opt.on{background:linear-gradient(180deg,#e8f1ff,#8db8ff);color:#06132a;border-color:#fff;box-shadow:0 0 26px rgba(120,175,255,.5)}
+.opt.on span{color:#16305e}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.dbtn{flex:0 0 auto;padding:11px 15px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);font:500 15px "Inter Tight",system-ui,sans-serif;cursor:pointer;white-space:nowrap;text-transform:capitalize}
+.dbtn:disabled{opacity:.3;cursor:default}
+.dbtn.on{background:linear-gradient(180deg,#e8f1ff,#8db8ff);color:#06132a;border-color:#fff}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.tbtn{padding:13px 6px;border-radius:14px;border:1px solid rgba(170,205,255,.35);background:rgba(120,170,255,.06);color:var(--ink);font:600 17px "Inter Tight",system-ui,sans-serif;cursor:pointer}
+.tbtn:hover{background:rgba(120,170,255,.16)}
+.tbtn.on{background:linear-gradient(180deg,#e8f1ff,#8db8ff);color:#06132a;border-color:#fff;box-shadow:0 0 22px rgba(120,175,255,.55)}
+.appfoot{text-align:center;color:#74829a;font-size:14px;padding:18px 0}
+.appfoot b{color:var(--silver)}
+.note{padding:12px 16px;border-radius:14px;margin-bottom:14px;font-size:15px;border:1px solid var(--line)}
+.note.ok{background:rgba(91,157,255,.12);border-color:rgba(140,185,255,.35)}
+.note.bad{background:rgba(255,50,75,.12);border-color:rgba(255,90,110,.4);color:#ffd2d7}
+.pill2{display:inline-block;font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);margin-left:6px}
+.pill2.ok{color:#bfe0ff;border-color:rgba(140,185,255,.4)} .pill2.bad{color:#ffb3a8;border-color:rgba(255,90,110,.45)}
+.bizbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:20px}
+.tabs2{display:flex;gap:6px;margin-bottom:16px}
+.tabs2.scroll{overflow-x:auto;padding-bottom:4px}
+.tabs2 button{flex:0 0 auto;padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--mute);font:500 15px "Inter Tight",system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.tabs2 button.on{background:linear-gradient(180deg,#f4f8ff,#9fc2ff);color:#06132a;border-color:#fff}
+.app .form label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--mute)}
+.app .form input,.app .form select{width:100%;font:500 16px "Inter Tight",system-ui,sans-serif;color:var(--ink);background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;color-scheme:dark}
+.app .form input:focus,.app .form select:focus{border-color:#8fb8ff;box-shadow:0 0 0 3px rgba(91,157,255,.22)}
+.app .form{gap:12px}
+.app .form small{color:#74829a}
+.slugrow{display:flex;align-items:center;gap:0}
+.slugrow span{padding:12px 10px 12px 14px;border:1px solid var(--line);border-right:0;border-radius:12px 0 0 12px;background:rgba(255,255,255,.03);color:var(--mute)}
+.slugrow input{border-radius:0 12px 12px 0!important}
+.linkbtn{background:none;border:0;color:var(--ice);font:500 14px "Inter Tight",system-ui,sans-serif;cursor:pointer;text-decoration:underline;padding:4px}
+.btn.sm{padding:9px 14px;font-size:14px}
+.btn.danger{border-color:rgba(255,90,110,.7);color:#ffb3a8;background:rgba(255,50,75,.12)}
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.daynav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.dlabel{display:flex;flex-direction:column;align-items:center;gap:6px}
+.dlabel b::first-letter{text-transform:uppercase}
+.dlabel input{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:6px 10px;font:500 14px "Inter Tight",system-ui,sans-serif;color-scheme:dark}
+.agrid{display:flex;flex-direction:column;gap:6px}
+.arow{display:grid;grid-template-columns:58px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03)}
+.arow.big{grid-template-columns:minmax(0,1fr);gap:8px;padding:14px}
+.arow .ah{font-weight:600;color:var(--ice)}
+.arow.booked{background:rgba(91,157,255,.12);border-color:rgba(140,185,255,.35)}
+.arow.blocked{background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 6px,transparent 6px 12px)}
+.arow.cont{opacity:.55}
+.arow a{color:var(--ice)}
+.srow{display:grid;grid-template-columns:minmax(0,1fr) 84px 84px 44px;gap:8px;align-items:center}
+.srow.head{order:-1;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#74829a}
+.srow2{display:flex;gap:8px;align-items:center;margin:8px 0 6px}
+.hgrid{display:grid;grid-template-columns:minmax(110px,1.2fr) repeat(4,minmax(0,1fr));gap:6px;align-items:center}
+.hgrid.head{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#74829a}
+.hgrid input[type=time]{padding:9px 6px;font-size:15px}
+.hgrid .chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-size:15px}
+.hgrid .chk input{width:auto}
+.chipsrow{display:flex;flex-wrap:wrap;gap:8px;min-height:8px}
+.chip2{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:14px}
+.chip2 button{background:none;border:0;color:var(--red2);cursor:pointer;margin-left:4px}
+.linkbox{padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.05);border:1px dashed rgba(140,185,255,.4);word-break:break-all;font-size:15px;user-select:all}
+.qr{display:block;margin:10px 0;border-radius:14px;background:#fff;padding:8px}
+@media (max-width:560px){
+  .srow{grid-template-columns:minmax(0,1fr) 64px 70px 40px;gap:6px}
+  .hgrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .hgrid.head{display:none}
+  .hgrid .chk{grid-column:1 / -1;padding-top:8px}
+  .arow{grid-template-columns:48px minmax(0,1fr)}
+  .arow .btn{grid-column:1 / -1;justify-self:start}
+  .box{padding:16px}
+}
+
 </style>
 </head>
 <body>
 <canvas id="motes" aria-hidden="true"></canvas>
 <canvas id="jelly" aria-hidden="true"></canvas>
 
-<div class="shell">
+<div class="shell" id="view-landing">
 <nav>
   <a class="brand" href="#top" aria-label="Millon Reserv">
     <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#6fa4ff"/></linearGradient></defs><circle cx="32" cy="32" r="29" fill="none" stroke="url(#mg)" stroke-width="3"/><path d="M19 45V20l13 16 13-16v25" fill="none" stroke="url(#mg)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></svg>
@@ -201,7 +286,8 @@ footer b{color:var(--silver);font-weight:600}
   </div>
   <div class="navr">
     <div class="langs" role="group" aria-label="Idioma / Language" id="langs"></div>
-    <a class="btn primary navcta" href="#contacto" data-i18n="navCta"></a>
+    <a class="navlogin" href="?panel" data-i18n="navLogin"></a>
+    <a class="btn primary navcta" href="?panel&registro" data-i18n="navCta"></a>
   </div>
 </nav>
 
@@ -211,7 +297,7 @@ footer b{color:var(--silver);font-weight:600}
     <h1 data-i18n="heroTitle"></h1>
     <p class="lead" data-i18n="heroText"></p>
     <div class="row">
-      <a class="btn primary" href="#contacto" data-i18n="ctaTrial"></a>
+      <a class="btn primary" href="?panel&registro" data-i18n="ctaTrial"></a>
       <a class="btn ghost" href="#como" data-i18n="ctaHow"></a>
     </div>
   </div>
@@ -305,11 +391,12 @@ footer b{color:var(--silver);font-weight:600}
 <section class="contact" id="contacto">
   <h2 data-i18n="contactTitle"></h2>
   <p data-i18n="contactText"></p>
-  <a class="btn primary" id="contactBtn" href="#" hidden target="_blank" rel="noopener"></a>
+  <div class="row" style="justify-content:center;margin-top:0"><a class="btn primary" href="?panel&registro" data-i18n="ctaTrial"></a><a class="btn ghost" href="?b=demo" data-i18n="seeDemo"></a><a class="btn ghost" id="contactBtn" href="#" hidden target="_blank" rel="noopener"></a></div>
 </section>
 
 <footer><b>Millon Reserv</b> · <span data-i18n="footer"></span></footer>
 </div>
+<main class="shell app" id="appRoot" hidden></main>
 
 <script>
 (function(){
@@ -512,6 +599,11 @@ var T = {
   }
 };
 
+Object.assign(T.es,{navLogin:"Entrar",seeDemo:"Ver una barbería de ejemplo"});
+Object.assign(T.en,{navLogin:"Log in",seeDemo:"See an example barbershop"});
+Object.assign(T.pt,{navLogin:"Entrar",seeDemo:"Ver uma barbearia de exemplo"});
+Object.assign(T.fr,{navLogin:"Connexion",seeDemo:"Voir un salon d'exemple"});
+Object.assign(T.it,{navLogin:"Accedi",seeDemo:"Vedi un barbiere di esempio"});
 var SEAL = { es:["3","días gratis"], en:["3","days free"], pt:["3","dias grátis"], fr:["3","jours gratuits"], it:["3","giorni gratis"] };
 var ROMAN = ["01","02","03","04","05"];
 var LANGS = [["es","ES","Español"],["en","EN","English"],["pt","PT","Português"],["fr","FR","Français"],["it","IT","Italiano"]];
@@ -619,6 +711,621 @@ $("again").onclick = function(){
 renderStatic(); hotWords();
 renderDemo();
 
+/* ===================================================================
+   RESERVAS REALES (Firebase Auth + Firestore)
+   Rutas:  ?b=nombre  -> pagina de reservas del negocio
+           ?panel     -> panel del dueño (login / registro)
+           ?admin     -> panel del administrador (Gustavo)
+   =================================================================== */
+const FB_CFG = {
+  apiKey: "AIzaSyDgpxT3gxydFOii4qcYA0cg_zFcH_ZbVQY",
+  authDomain: "millon-reserv.firebaseapp.com",
+  projectId: "millon-reserv",
+  storageBucket: "millon-reserv.firebasestorage.app",
+  messagingSenderId: "255061279875",
+  appId: "1:255061279875:web:a8628f8558763e428207b6"
+};
+const RESERVED = ["admin","panel","registro","login","api","www","app","millon","reserv","millonreserv"];
+const params = new URLSearchParams(location.search);
+const ROUTE = params.has("b") ? "book" : params.has("panel") ? "panel" : params.has("admin") ? "admin" : "landing";
+const APPMODE = ROUTE !== "landing";
+const FB = { auth:null, db:null };
+const root = $("appRoot");
+let fbPromise = null;
+
+function loadScript(src){
+  return new Promise(function(res, rej){
+    const s = document.createElement("script");
+    s.src = src; s.onload = res; s.onerror = function(){ rej(new Error("No se pudo cargar " + src)); };
+    document.head.appendChild(s);
+  });
+}
+function initFirebase(){
+  if (fbPromise) return fbPromise;
+  const base = "https://www.gstatic.com/firebasejs/10.12.2/";
+  fbPromise = loadScript(base + "firebase-app-compat.js")
+    .then(function(){ return Promise.all([loadScript(base + "firebase-auth-compat.js"), loadScript(base + "firebase-firestore-compat.js")]); })
+    .then(function(){ firebase.initializeApp(FB_CFG); FB.auth = firebase.auth(); FB.db = firebase.firestore(); });
+  fbPromise.catch(function(){ fbPromise = null; });
+  return fbPromise;
+}
+
+/* ---------- utilidades ---------- */
+const pad = n => (n < 10 ? "0" : "") + n;
+const ymd = d => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+const toMin = s => { const p = String(s || "").split(":"); return (+p[0]) * 60 + (+p[1] || 0); };
+const fmtMin = m => pad(Math.floor(m / 60)) + ":" + pad(m % 60);
+const slotKey = (date, hhmm) => date + "_" + hhmm.replace(":", "");
+const parseDate = s => { const p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); };
+const tsToDate = v => (v && v.toDate) ? v.toDate() : (v ? new Date(v) : null);
+const slugify = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 30);
+function isOpen(b){
+  if (!b || !b.active) return false;
+  const n = Date.now(), t = tsToDate(b.trialEnd), p = tsToDate(b.paidUntil);
+  return !!((t && t.getTime() > n) || (p && p.getTime() > n));
+}
+const bizLink = slug => location.origin + location.pathname + "?b=" + slug;
+const DAYNAMES = {0:"Domingo",1:"Lunes",2:"Martes",3:"Miércoles",4:"Jueves",5:"Viernes",6:"Sábado"};
+function fmtDateLang(dateStr, lang, long){
+  try { return parseDate(dateStr).toLocaleDateString(lang, long ? {weekday:"long", day:"numeric", month:"long"} : {weekday:"short", day:"numeric", month:"short"}); }
+  catch (e) { return dateStr; }
+}
+function daysLeft(d){ return d ? Math.ceil((d.getTime() - Date.now()) / 86400000) : 0; }
+function defaultBiz(uid, email, name, slug){
+  const wd = {on:true, open:"09:00", close:"18:00", bs:"13:00", be:"14:00"};
+  return {
+    ownerUid: uid, ownerEmail: email, name: name, slug: slug, active: true,
+    trialEnd: firebase.firestore.Timestamp.fromDate(new Date(Date.now() + 3 * 86400000)),
+    paidUntil: null, currency: "USD", slotMinutes: 30,
+    services: [{id:"s1", name:"Corte", minutes:30, price:10}, {id:"s2", name:"Corte y barba", minutes:60, price:15}],
+    hours: {0:{on:false, open:"09:00", close:"14:00", bs:"", be:""}, 1:wd, 2:wd, 3:wd, 4:wd, 5:wd, 6:{on:true, open:"09:00", close:"14:00", bs:"", be:""}},
+    daysOff: [], createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+}
+
+/* ===================================================================
+   PAGINA DE RESERVAS DEL CLIENTE  (?b=nombre)
+   =================================================================== */
+const BK = {
+  es:{svc:"Elige tu servicio", day:"Elige el día", time:"Elige la hora", data:"Tus datos", none:"No hay horas libres este día. Prueba otro día.", name:"Tu nombre", phone:"📞 Tu teléfono", confirm:"Confirmar reserva", done:"Reserva confirmada ✅", doneText:"{name}, te esperamos el {date} a las {time}.", doneSvc:"Servicio: {svc}", another:"Hacer otra reserva", closed:"Este negocio no está recibiendo reservas por ahora.", notFound:"No encontramos este negocio. Revisa el enlace.", loading:"Cargando…", taken:"Esa hora acaba de ser tomada. Elige otra.", fail:"No se pudo reservar. Intenta de nuevo.", missing:"Falta tu nombre y tu teléfono.", neterr:"No se pudo conectar. Revisa tu internet e intenta de nuevo.", min:"min", footer:"Reservas con"},
+  en:{svc:"Choose your service", day:"Choose the day", time:"Choose the time", data:"Your details", none:"No open times this day. Try another day.", name:"Your name", phone:"📞 Your phone", confirm:"Confirm booking", done:"Booking confirmed ✅", doneText:"{name}, see you on {date} at {time}.", doneSvc:"Service: {svc}", another:"Make another booking", closed:"This business is not taking bookings right now.", notFound:"We couldn't find this business. Check the link.", loading:"Loading…", taken:"That time was just taken. Pick another.", fail:"The booking could not be made. Try again.", missing:"Your name and phone are missing.", neterr:"Could not connect. Check your internet and try again.", min:"min", footer:"Bookings by"},
+  pt:{svc:"Escolha o serviço", day:"Escolha o dia", time:"Escolha o horário", data:"Seus dados", none:"Não há horários livres neste dia. Tente outro dia.", name:"Seu nome", phone:"📞 Seu telefone", confirm:"Confirmar reserva", done:"Reserva confirmada ✅", doneText:"{name}, esperamos você em {date} às {time}.", doneSvc:"Serviço: {svc}", another:"Fazer outra reserva", closed:"Este negócio não está aceitando reservas no momento.", notFound:"Não encontramos este negócio. Confira o link.", loading:"Carregando…", taken:"Esse horário acabou de ser ocupado. Escolha outro.", fail:"Não foi possível reservar. Tente de novo.", missing:"Faltam seu nome e telefone.", neterr:"Não foi possível conectar. Verifique sua internet e tente de novo.", min:"min", footer:"Reservas com"},
+  fr:{svc:"Choisissez le service", day:"Choisissez le jour", time:"Choisissez l'heure", data:"Vos coordonnées", none:"Aucun créneau libre ce jour. Essayez un autre jour.", name:"Votre nom", phone:"📞 Votre téléphone", confirm:"Confirmer la réservation", done:"Réservation confirmée ✅", doneText:"{name}, rendez-vous le {date} à {time}.", doneSvc:"Service : {svc}", another:"Faire une autre réservation", closed:"Ce commerce ne prend pas de réservations pour le moment.", notFound:"Nous n'avons pas trouvé ce commerce. Vérifiez le lien.", loading:"Chargement…", taken:"Ce créneau vient d'être pris. Choisissez-en un autre.", fail:"La réservation a échoué. Réessayez.", missing:"Il manque votre nom et votre téléphone.", neterr:"Connexion impossible. Vérifiez votre internet et réessayez.", min:"min", footer:"Réservations avec"},
+  it:{svc:"Scegli il servizio", day:"Scegli il giorno", time:"Scegli l'orario", data:"I tuoi dati", none:"Nessun orario libero in questo giorno. Prova un altro giorno.", name:"Il tuo nome", phone:"📞 Il tuo telefono", confirm:"Conferma prenotazione", done:"Prenotazione confermata ✅", doneText:"{name}, ti aspettiamo il {date} alle {time}.", doneSvc:"Servizio: {svc}", another:"Fai un'altra prenotazione", closed:"Questa attività al momento non accetta prenotazioni.", notFound:"Non abbiamo trovato questa attività. Controlla il link.", loading:"Caricamento…", taken:"Quell'orario è appena stato preso. Scegline un altro.", fail:"Impossibile prenotare. Riprova.", missing:"Mancano il tuo nome e il telefono.", neterr:"Impossibile connettersi. Controlla internet e riprova.", min:"min", footer:"Prenotazioni con"}
+};
+const bk = { slug:"", biz:null, svc:null, date:null, time:null, taken:{}, loading:true, net:false, err:"", done:null, name:"", phone:"", busy:false };
+
+function dayIsBookable(biz, dateStr){
+  const h = biz.hours && biz.hours[parseDate(dateStr).getDay()];
+  if (!h || !h.on) return false;
+  if ((biz.daysOff || []).indexOf(dateStr) >= 0) return false;
+  return true;
+}
+function bookableDays(biz){
+  const out = [], base = new Date(); base.setHours(0,0,0,0);
+  for (let i = 0; i < 21; i++){ const d = new Date(base.getTime() + i * 86400000); out.push(ymd(d)); }
+  return out;
+}
+function firstOpenDate(biz, svc){
+  const days = bookableDays(biz);
+  for (let i = 0; i < days.length; i++) if (dayIsBookable(biz, days[i]) && computeTimes(biz, days[i], svc, {}).length) return days[i];
+  for (let i = 0; i < days.length; i++) if (dayIsBookable(biz, days[i])) return days[i];
+  return days[0];
+}
+function computeTimes(biz, dateStr, svc, taken){
+  if (!svc || !dayIsBookable(biz, dateStr)) return [];
+  const h = biz.hours[parseDate(dateStr).getDay()];
+  const step = biz.slotMinutes || 30, open = toMin(h.open), close = toMin(h.close);
+  const need = Math.max(1, Math.ceil(svc.minutes / step));
+  const bs = h.bs ? toMin(h.bs) : null, be = h.be ? toMin(h.be) : null;
+  const now = new Date(), isToday = dateStr === ymd(now), nowMin = now.getHours() * 60 + now.getMinutes();
+  const res = [];
+  for (let t = open; t + need * step <= close; t += step){
+    if (isToday && t <= nowMin) continue;
+    let ok = true;
+    for (let k = 0; k < need; k++){
+      const m = t + k * step;
+      if (bs != null && be != null && m < be && m + step > bs) { ok = false; break; }
+      if (taken[fmtMin(m)]) { ok = false; break; }
+    }
+    if (ok) res.push(fmtMin(t));
+  }
+  return res;
+}
+async function bkLoadTaken(){
+  bk.taken = {};
+  const snap = await FB.db.collection("businesses/" + bk.slug + "/slots").where("date", "==", bk.date).get();
+  snap.docs.forEach(function(d){ const v = d.data(); if (v && v.time) bk.taken[v.time] = true; });
+}
+async function bookInit(){
+  document.body.classList.add("appmode");
+  bk.slug = (params.get("b") || "").toLowerCase().replace(/[^a-z0-9-]/g, "");
+  bookRender();
+  try {
+    await initFirebase();
+    const snap = await FB.db.doc("businesses/" + bk.slug).get();
+    bk.biz = snap.exists ? snap.data() : null;
+    if (bk.biz){
+      document.title = bk.biz.name + " · Millon Reserv";
+      bk.svc = (bk.biz.services || [])[0] || null;
+      bk.date = firstOpenDate(bk.biz, bk.svc);
+      await bkLoadTaken();
+    }
+  } catch (e) { bk.net = true; }
+  bk.loading = false;
+  bookRender();
+}
+function bookRender(){
+  const t = BK[state.lang], b = bk.biz;
+  let h = '<div class="apphead"><div class="bname">' + esc(b ? b.name : "Millon Reserv") + '</div><div class="langs" id="bkLangs"></div></div>';
+  if (bk.loading) h += '<div class="glass box center">' + esc(t.loading) + '</div>';
+  else if (bk.net) h += '<div class="glass box center">' + esc(t.neterr) + '</div>';
+  else if (!b) h += '<div class="glass box center">' + esc(t.notFound) + '</div>';
+  else if (!isOpen(b)) h += '<div class="glass box center">' + esc(t.closed) + '</div>';
+  else if (bk.done){
+    h += '<div class="glass box center"><div class="bigok">' + esc(t.done) + '</div><p>' + esc(t.doneText.replace("{name}", bk.done.name).replace("{date}", fmtDateLang(bk.done.date, state.lang, true)).replace("{time}", bk.done.time)) + '</p><p class="mute">' + esc(t.doneSvc.replace("{svc}", bk.done.svc)) + '</p><button class="btn ghost" data-act="bk-again" type="button">' + esc(t.another) + '</button></div>';
+  } else {
+    h += '<div class="glass box"><div class="stitle">1 · ' + esc(t.svc) + '</div><div class="opts">';
+    (b.services || []).forEach(function(s){
+      h += '<button type="button" class="opt' + (bk.svc && bk.svc.id === s.id ? ' on' : '') + '" data-act="bk-svc" data-id="' + esc(s.id) + '"><b>' + esc(s.name) + '</b><span>' + esc(s.minutes) + ' ' + esc(t.min) + ' · ' + esc(s.price) + ' ' + esc(b.currency || "") + '</span></button>';
+    });
+    h += '</div></div>';
+    h += '<div class="glass box"><div class="stitle">2 · ' + esc(t.day) + '</div><div class="days">';
+    bookableDays(b).forEach(function(d){
+      const ok = dayIsBookable(b, d), on = d === bk.date;
+      h += '<button type="button" class="dbtn' + (on ? ' on' : '') + '"' + (ok ? '' : ' disabled') + ' data-act="bk-day" data-date="' + d + '">' + esc(fmtDateLang(d, state.lang, false)) + '</button>';
+    });
+    h += '</div></div>';
+    const times = computeTimes(b, bk.date, bk.svc, bk.taken);
+    h += '<div class="glass box"><div class="stitle">3 · ' + esc(t.time) + '</div>';
+    if (!times.length) h += '<p class="mute">' + esc(t.none) + '</p>';
+    else { h += '<div class="tgrid">'; times.forEach(function(x){ h += '<button type="button" class="tbtn' + (bk.time === x ? ' on' : '') + '" data-act="bk-time" data-time="' + x + '">' + x + '</button>'; }); h += '</div>'; }
+    h += '</div>';
+    if (bk.time){
+      h += '<div class="glass box"><div class="stitle">4 · ' + esc(t.data) + '</div><div class="form">' +
+        '<input id="bk-name" type="text" maxlength="60" autocomplete="name" value="' + esc(bk.name) + '" placeholder="' + esc(t.name) + '" aria-label="' + esc(t.name) + '">' +
+        '<input id="bk-phone" type="tel" inputmode="tel" maxlength="30" autocomplete="tel" value="' + esc(bk.phone) + '" placeholder="' + esc(t.phone) + '" aria-label="' + esc(t.phone) + '">' +
+        '<div class="err">' + esc(bk.err) + '</div>' +
+        '<button class="ok" id="bk-confirm" type="button" data-act="bk-confirm"' + (bk.busy ? ' disabled' : '') + '>' + esc(t.confirm) + '</button></div></div>';
+    } else if (bk.err) h += '<div class="err center">' + esc(bk.err) + '</div>';
+  }
+  h += '<div class="appfoot">' + esc(t.footer) + ' <b>Millon Reserv</b></div>';
+  root.innerHTML = h;
+  renderLangButtons($("bkLangs"), bookRender);
+}
+async function bkConfirm(){
+  const t = BK[state.lang];
+  bk.name = ($("bk-name") ? $("bk-name").value : bk.name).trim();
+  bk.phone = ($("bk-phone") ? $("bk-phone").value : bk.phone).trim();
+  if (!bk.name || !bk.phone){ bk.err = t.missing; return bookRender(); }
+  bk.busy = true; bk.err = ""; bookRender();
+  const biz = bk.biz, step = biz.slotMinutes || 30, need = Math.max(1, Math.ceil(bk.svc.minutes / step)), start = toMin(bk.time);
+  const db = FB.db, batch = db.batch(), base = "businesses/" + bk.slug;
+  const bref = db.collection(base + "/bookings").doc();
+  const ids = [];
+  for (let k = 0; k < need; k++){
+    const hhmm = fmtMin(start + k * step), id = slotKey(bk.date, hhmm);
+    ids.push(id);
+    batch.set(db.doc(base + "/slots/" + id), {date: bk.date, time: hhmm, kind: "booking"});
+  }
+  batch.set(bref, {name: bk.name.slice(0, 60), phone: bk.phone.slice(0, 30), serviceId: bk.svc.id, serviceName: bk.svc.name, minutes: bk.svc.minutes, price: bk.svc.price, date: bk.date, time: bk.time, slotIds: ids, status: "ok", createdAt: firebase.firestore.FieldValue.serverTimestamp()});
+  try {
+    await batch.commit();
+    bk.done = {name: bk.name, date: bk.date, time: bk.time, svc: bk.svc.name};
+    bk.time = null; bk.name = ""; bk.phone = "";
+  } catch (e) {
+    try { await bkLoadTaken(); } catch (e2) {}
+    bk.time = null;
+    bk.err = (e && e.code === "permission-denied") ? t.taken : t.fail;
+  }
+  bk.busy = false;
+  bookRender();
+}
+function bookClick(e){
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.getAttribute("data-act");
+  if (a === "bk-svc"){ bk.svc = bk.biz.services.filter(function(s){ return s.id === el.getAttribute("data-id"); })[0]; bk.time = null; bk.err = ""; bookRender(); }
+  else if (a === "bk-day"){ bk.date = el.getAttribute("data-date"); bk.time = null; bk.err = ""; bkLoadTaken().then(bookRender, bookRender); }
+  else if (a === "bk-time"){ if ($("bk-name")) bk.name = $("bk-name").value; if ($("bk-phone")) bk.phone = $("bk-phone").value; bk.time = el.getAttribute("data-time"); bk.err = ""; bookRender(); }
+  else if (a === "bk-confirm") bkConfirm();
+  else if (a === "bk-again"){ bk.done = null; bk.err = ""; bkLoadTaken().then(bookRender, bookRender); }
+}
+function renderLangButtons(el, after){
+  if (!el) return;
+  el.innerHTML = "";
+  LANGS.forEach(function(l){
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = l[1]; b.setAttribute("aria-label", l[2]);
+    b.setAttribute("aria-pressed", state.lang === l[0] ? "true" : "false");
+    b.onclick = function(){ state.lang = l[0]; try { localStorage.setItem("millon-lang", l[0]); } catch (e) {} document.documentElement.lang = l[0]; after(); };
+    el.appendChild(b);
+  });
+}
+
+/* ===================================================================
+   PANEL DEL DUEÑO  (?panel)
+   =================================================================== */
+const P = { email:"", registering:false, user:null, biz:null, bizId:null, tab:"agenda", date:ymd(new Date()), bookings:[], slots:[], msg:"", msgKind:"ok", mode:"login", loading:true, confirmId:null, dayLoading:false, svcDraft:null };
+const PMODE_TXT = {login:"Entrar", register:"Crear mi agenda"};
+
+function authErr(e){
+  const c = e && e.code || "";
+  if (c.indexOf("email-already") >= 0) return "Ese correo ya tiene cuenta. Entra con tu contraseña.";
+  if (c.indexOf("weak-password") >= 0) return "La contraseña es muy corta (mínimo 6 caracteres).";
+  if (c.indexOf("invalid-email") >= 0) return "El correo no es válido.";
+  if (c.indexOf("user-not-found") >= 0 || c.indexOf("wrong-password") >= 0 || c.indexOf("invalid-credential") >= 0 || c.indexOf("invalid-login") >= 0) return "Correo o contraseña incorrectos.";
+  if (c.indexOf("too-many") >= 0) return "Demasiados intentos. Espera unos minutos.";
+  if (c.indexOf("network") >= 0) return "Sin conexión. Revisa tu internet.";
+  if (c.indexOf("permission") >= 0) return "No tienes permiso para esta acción.";
+  return "Algo falló. Intenta otra vez.";
+}
+function say(msg, kind){ P.msg = msg || ""; P.msgKind = kind || "ok"; }
+async function panelInit(){
+  document.body.classList.add("appmode");
+  if (params.has("registro") || params.get("panel") === "registro") P.mode = "register";
+  panelRender();
+  try { await initFirebase(); } catch (e) { P.loading = false; say("No se pudo conectar. Revisa tu internet y recarga.", "bad"); panelRender(); return; }
+  FB.auth.onAuthStateChanged(async function(u){
+    if (P.registering) return;
+    P.user = u; P.biz = null; P.bizId = null; P.loading = false;
+    if (u){
+      try {
+        const q = await FB.db.collection("businesses").where("ownerUid", "==", u.uid).limit(1).get();
+        if (!q.empty){ P.bizId = q.docs[0].id; P.biz = q.docs[0].data(); await loadDay(); }
+      } catch (e) { say(authErr(e), "bad"); }
+    }
+    panelRender();
+  });
+}
+async function loadDay(){
+  if (!P.bizId) return;
+  P.dayLoading = true;
+  const base = "businesses/" + P.bizId;
+  try {
+    const r = await Promise.all([
+      FB.db.collection(base + "/bookings").where("date", "==", P.date).get(),
+      FB.db.collection(base + "/slots").where("date", "==", P.date).get()
+    ]);
+    P.bookings = r[0].docs.map(function(d){ return Object.assign({id: d.id}, d.data()); });
+    P.slots = r[1].docs.map(function(d){ return Object.assign({id: d.id}, d.data()); });
+  } catch (e) { say(authErr(e), "bad"); }
+  P.dayLoading = false;
+}
+function panelRender(){
+  let h = "";
+  if (P.loading) h = '<div class="glass box center">Cargando…</div>';
+  else if (!P.user) h = authCard();
+  else if (!P.biz) h = createBizCard();
+  else h = dashboard();
+  root.innerHTML = '<div class="apphead"><div class="bname">Millon Reserv · Panel</div>' + (P.user ? '<button class="btn ghost sm" data-act="logout" type="button">Salir</button>' : '<a class="btn ghost sm" href="./">Inicio</a>') + '</div>' + (P.msg ? '<div class="note ' + P.msgKind + '">' + esc(P.msg) + '</div>' : "") + h;
+}
+function authCard(){
+  const reg = P.mode === "register";
+  let h = '<div class="glass box"><div class="tabs2"><button type="button" class="' + (!reg ? "on" : "") + '" data-act="mode" data-mode="login">Entrar</button><button type="button" class="' + (reg ? "on" : "") + '" data-act="mode" data-mode="register">Crear mi agenda gratis</button></div>';
+  h += '<form class="form" id="fAuth" autocomplete="on">';
+  if (reg) h += '<label>Nombre de tu negocio<input name="bname" type="text" maxlength="50" required placeholder="Ej: Barbería Juan"></label><label>Tu enlace<div class="slugrow"><span>?b=</span><input name="slug" type="text" maxlength="30" required placeholder="barberia-juan" pattern="[a-z0-9\\-]{3,30}"></div><small>Solo letras minúsculas, números y guiones (3 a 30).</small></label>';
+  h += '<label>Correo<input name="email" type="email" autocomplete="email" required placeholder="tu@correo.com" value="' + esc(P.email) + '"></label>';
+  h += '<label>Contraseña<input name="pass" type="password" autocomplete="' + (reg ? "new-password" : "current-password") + '" minlength="6" required placeholder="Mínimo 6 caracteres"></label>';
+  h += '<button class="ok" type="submit">' + (reg ? "Crear mi agenda (3 días gratis)" : "Entrar") + '</button>';
+  if (!reg) h += '<button class="linkbtn" type="button" data-act="reset">Olvidé mi contraseña</button>';
+  h += '</form></div>';
+  return h;
+}
+function createBizCard(){
+  return '<div class="glass box"><div class="stitle">Falta crear tu negocio</div><form class="form" id="fCreate"><label>Nombre de tu negocio<input name="bname" type="text" maxlength="50" required></label><label>Tu enlace<div class="slugrow"><span>?b=</span><input name="slug" type="text" maxlength="30" required pattern="[a-z0-9\\-]{3,30}"></div></label><button class="ok" type="submit">Crear (3 días gratis)</button></form></div>';
+}
+function dashboard(){
+  const b = P.biz;
+  const tabs = [["agenda","Agenda"],["servicios","Servicios"],["horario","Horario"],["enlace","Mi enlace"],["cuenta","Cuenta"]];
+  let h = '<div class="bizbar"><b>' + esc(b.name) + '</b>' + (isOpen(b) ? '' : '<span class="pill2 bad">Reservas cerradas</span>') + '</div>';
+  h += '<div class="tabs2 scroll">' + tabs.map(function(x){ return '<button type="button" class="' + (P.tab === x[0] ? "on" : "") + '" data-act="tab" data-tab="' + x[0] + '">' + x[1] + '</button>'; }).join("") + '</div>';
+  if (P.tab === "agenda") h += tabAgenda();
+  else if (P.tab === "servicios") h += tabServicios();
+  else if (P.tab === "horario") h += tabHorario();
+  else if (P.tab === "enlace") h += tabEnlace();
+  else h += tabCuenta();
+  return h;
+}
+function tabAgenda(){
+  const b = P.biz, d = parseDate(P.date), h = b.hours[d.getDay()];
+  let out = '<div class="glass box"><div class="daynav"><button type="button" class="btn ghost sm" data-act="day" data-d="-1">‹</button><div class="dlabel"><b>' + esc(fmtDateLang(P.date, "es", true)) + '</b><input type="date" id="pickDate" value="' + P.date + '"></div><button type="button" class="btn ghost sm" data-act="day" data-d="1">›</button></div>';
+  if (P.dayLoading) return out + '<p class="mute center">Cargando…</p></div>';
+  const isOff = (b.daysOff || []).indexOf(P.date) >= 0;
+  if (!h || !h.on || isOff){ out += '<p class="mute center">Este día tu negocio está cerrado.</p></div>'; }
+  else {
+    const step = b.slotMinutes || 30, open = toMin(h.open), close = toMin(h.close);
+    const bs = h.bs ? toMin(h.bs) : null, be = h.be ? toMin(h.be) : null;
+    const bookAt = {}, slotAt = {};
+    P.bookings.forEach(function(x){ bookAt[x.time] = x; });
+    P.slots.forEach(function(x){ slotAt[x.time] = x; });
+    const shown = {};
+    out += '<div class="agrid">';
+    for (let t = open; t + step <= close; t += step){
+      const hh = fmtMin(t), bkg = bookAt[hh], sl = slotAt[hh];
+      shown[hh] = true;
+      if (bkg){
+        const ask = P.confirmId === bkg.id;
+        out += '<div class="arow booked"><span class="ah">' + hh + '</span><span class="ainfo"><b>' + esc(bkg.name) + '</b> · ' + esc(bkg.serviceName) + ' (' + esc(bkg.minutes) + ' min)<br><a href="tel:' + esc(bkg.phone) + '">' + esc(bkg.phone) + '</a></span><button type="button" class="btn ghost sm' + (ask ? ' danger' : '') + '" data-act="cancel" data-id="' + esc(bkg.id) + '">' + (ask ? "¿Seguro? Toca otra vez" : "Cancelar") + '</button></div>';
+      } else if (sl && sl.kind === "booking"){
+        out += '<div class="arow cont"><span class="ah">' + hh + '</span><span class="ainfo mute">↳ continúa la cita anterior</span></div>';
+      } else if (sl && sl.kind === "block"){
+        out += '<div class="arow blocked"><span class="ah">' + hh + '</span><span class="ainfo mute">Bloqueado</span><button type="button" class="btn ghost sm" data-act="unblock" data-time="' + hh + '">Liberar</button></div>';
+      } else if (bs != null && be != null && t < be && t + step > bs){
+        out += '<div class="arow cont"><span class="ah">' + hh + '</span><span class="ainfo mute">Descanso</span></div>';
+      } else {
+        out += '<div class="arow free"><span class="ah">' + hh + '</span><span class="ainfo mute">Libre</span><button type="button" class="btn ghost sm" data-act="block" data-time="' + hh + '">Bloquear</button></div>';
+      }
+    }
+    P.bookings.forEach(function(x){ if (!shown[x.time]) out += '<div class="arow booked"><span class="ah">' + esc(x.time) + '</span><span class="ainfo"><b>' + esc(x.name) + '</b> · ' + esc(x.serviceName) + '<br><a href="tel:' + esc(x.phone) + '">' + esc(x.phone) + '</a></span><button type="button" class="btn ghost sm" data-act="cancel" data-id="' + esc(x.id) + '">Cancelar</button></div>'; });
+    out += '</div>';
+    out += '<p class="mute small">Citas este día: ' + P.bookings.length + '</p></div>';
+  }
+  return out;
+}
+function tabServicios(){
+  const b = P.biz, list = P.svcDraft || b.services || [];
+  let h = '<div class="glass box"><div class="stitle">Tus servicios</div><form id="fSvc" class="form">';
+  list.forEach(function(s, i){
+    h += '<div class="srow"><input name="n' + i + '" value="' + esc(s.name) + '" maxlength="40" placeholder="Servicio" aria-label="Nombre del servicio"><input name="m' + i + '" type="number" min="5" max="480" value="' + esc(s.minutes) + '" aria-label="Minutos"><input name="p' + i + '" type="number" min="0" step="any" value="' + esc(s.price) + '" aria-label="Precio"><button type="button" class="btn ghost sm" data-act="svc-del" data-i="' + i + '" aria-label="Quitar">✕</button></div>';
+  });
+  h += '<div class="srow head"><span>Nombre</span><span>Minutos</span><span>Precio</span><span></span></div>';
+  h += '<button type="button" class="btn ghost" data-act="svc-add">+ Añadir servicio</button><button class="ok" type="submit">Guardar servicios</button></form></div>';
+  return h;
+}
+function tabHorario(){
+  const b = P.biz, order = [1,2,3,4,5,6,0];
+  let h = '<div class="glass box"><div class="stitle">Tu horario</div><form id="fHours" class="form"><label>Duración de cada turno<select name="slotMinutes">';
+  [15,20,30,45,60].forEach(function(m){ h += '<option value="' + m + '"' + ((b.slotMinutes || 30) === m ? " selected" : "") + '>' + m + ' min</option>'; });
+  h += '</select></label><div class="hgrid head"><span>Día</span><span>Abre</span><span>Cierra</span><span>Descanso de</span><span>a</span></div>';
+  order.forEach(function(d){
+    const x = b.hours[d] || {on:false, open:"09:00", close:"18:00", bs:"", be:""};
+    h += '<div class="hgrid"><label class="chk"><input type="checkbox" name="on' + d + '"' + (x.on ? " checked" : "") + '> ' + DAYNAMES[d] + '</label><input type="time" name="o' + d + '" value="' + esc(x.open) + '"><input type="time" name="c' + d + '" value="' + esc(x.close) + '"><input type="time" name="bs' + d + '" value="' + esc(x.bs || "") + '"><input type="time" name="be' + d + '" value="' + esc(x.be || "") + '"></div>';
+  });
+  h += '<div class="stitle" style="margin-top:14px">Días libres (feriados, vacaciones)</div><div class="chipsrow">';
+  (b.daysOff || []).slice().sort().forEach(function(x){ h += '<span class="chip2">' + esc(x) + ' <button type="button" data-act="off-del" data-d="' + esc(x) + '" aria-label="Quitar">✕</button></span>'; });
+  h += '</div><div class="srow2"><input type="date" id="offDate"><button type="button" class="btn ghost sm" data-act="off-add">Añadir día libre</button></div>';
+  h += '<button class="ok" type="submit">Guardar horario</button></form></div>';
+  return h;
+}
+function tabEnlace(){
+  const b = P.biz, link = bizLink(P.bizId);
+  const msg = "Reserva tu hora en " + b.name + " aquí: " + link;
+  return '<div class="glass box"><div class="stitle">Tu enlace para clientes</div><div class="linkbox" id="linkText">' + esc(link) + '</div><div class="btnrow"><button type="button" class="btn primary sm" data-act="copy" data-text="' + esc(link) + '">Copiar enlace</button><a class="btn ghost sm" href="' + esc(link) + '" target="_blank" rel="noopener">Abrir</a><a class="btn ghost sm" href="https://wa.me/?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">Enviar por WhatsApp</a></div><p class="mute small">Ponlo en tu Instagram, WhatsApp o en un cartel con este código QR:</p><img class="qr" alt="Código QR" width="200" height="200" src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&margin=10&data=' + encodeURIComponent(link) + '"></div>' +
+    '<div class="glass box"><div class="stitle">Datos del negocio</div><form id="fBiz" class="form"><label>Nombre<input name="bname" value="' + esc(b.name) + '" maxlength="50" required></label><label>Moneda (se muestra junto al precio)<input name="currency" value="' + esc(b.currency || "") + '" maxlength="8" placeholder="USD"></label><button class="ok" type="submit">Guardar</button></form></div>';
+}
+function tabCuenta(){
+  const b = P.biz, t = tsToDate(b.trialEnd), p = tsToDate(b.paidUntil);
+  let st;
+  if (p && p.getTime() > Date.now()) st = '<b>Plan activo</b> hasta el ' + esc(p.toLocaleDateString("es")) + '.';
+  else if (t && t.getTime() > Date.now()) st = '<b>Prueba gratis:</b> te quedan ' + daysLeft(t) + ' día(s). Termina el ' + esc(t.toLocaleDateString("es")) + '.';
+  else st = '<b>Tu prueba terminó.</b> Tus clientes ya no pueden reservar hasta que actives el plan.';
+  const ig = (typeof CONTACT !== "undefined" && CONTACT.url) ? '<a class="btn primary sm" href="' + esc(CONTACT.url) + '" target="_blank" rel="noopener">' + esc(CONTACT.label || CONTACT.url) + '</a>' : '';
+  return '<div class="glass box"><div class="stitle">Tu plan</div><p>' + st + '</p><p class="mute small">Para activar o renovar el plan, escríbenos:</p><div class="btnrow">' + ig + '</div></div><div class="glass box"><div class="stitle">Cuenta</div><p class="mute small">' + esc(P.user.email) + '</p><button type="button" class="btn ghost sm" data-act="logout">Cerrar sesión</button></div>';
+}
+function readSvcForm(){
+  const f = $("fSvc"); if (!f) return null;
+  const out = [];
+  let i = 0;
+  while (f.elements["n" + i]){
+    out.push({id: "s" + (i + 1), name: f.elements["n" + i].value.trim(), minutes: +f.elements["m" + i].value, price: +f.elements["p" + i].value});
+    i++;
+  }
+  return out;
+}
+async function saveBiz(fields, okMsg){
+  try {
+    await FB.db.doc("businesses/" + P.bizId).update(fields);
+    Object.assign(P.biz, fields);
+    say(okMsg, "ok");
+  } catch (e) { say(authErr(e), "bad"); }
+  panelRender();
+}
+async function panelClick(e){
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.getAttribute("data-act");
+  if (a === "mode"){ P.mode = el.getAttribute("data-mode"); say(""); panelRender(); }
+  else if (a === "logout"){ await FB.auth.signOut(); say(""); }
+  else if (a === "reset"){
+    const f = $("fAuth"), em = f && f.elements.email.value.trim();
+    if (!em){ say("Escribe tu correo arriba y vuelve a tocar este botón.", "bad"); return panelRender(); }
+    try { await FB.auth.sendPasswordResetEmail(em); say("Te enviamos un correo para cambiar tu contraseña.", "ok"); } catch (er) { say(authErr(er), "bad"); }
+    panelRender();
+  }
+  else if (a === "tab"){ P.tab = el.getAttribute("data-tab"); P.svcDraft = null; say(""); panelRender(); }
+  else if (a === "day"){ const d = parseDate(P.date); d.setDate(d.getDate() + (+el.getAttribute("data-d"))); P.date = ymd(d); P.confirmId = null; await loadDay(); panelRender(); }
+  else if (a === "block"){
+    const hh = el.getAttribute("data-time");
+    try { await FB.db.doc("businesses/" + P.bizId + "/slots/" + slotKey(P.date, hh)).set({date: P.date, time: hh, kind: "block"}); say(""); } catch (er) { say(authErr(er), "bad"); }
+    await loadDay(); panelRender();
+  }
+  else if (a === "unblock"){
+    const hh = el.getAttribute("data-time");
+    try { await FB.db.doc("businesses/" + P.bizId + "/slots/" + slotKey(P.date, hh)).delete(); say(""); } catch (er) { say(authErr(er), "bad"); }
+    await loadDay(); panelRender();
+  }
+  else if (a === "cancel"){
+    const id = el.getAttribute("data-id");
+    if (P.confirmId !== id){ P.confirmId = id; panelRender(); setTimeout(function(){ if (P.confirmId === id){ P.confirmId = null; if (P.user && P.tab === "agenda") panelRender(); } }, 4000); return; }
+    const bkg = P.bookings.filter(function(x){ return x.id === id; })[0];
+    P.confirmId = null;
+    try {
+      const batch = FB.db.batch(), base = "businesses/" + P.bizId;
+      (bkg.slotIds || []).forEach(function(sid){ batch.delete(FB.db.doc(base + "/slots/" + sid)); });
+      batch.delete(FB.db.doc(base + "/bookings/" + id));
+      await batch.commit(); say("Cita cancelada. La hora quedó libre.", "ok");
+    } catch (er) { say(authErr(er), "bad"); }
+    await loadDay(); panelRender();
+  }
+  else if (a === "svc-add"){ const cur = readSvcForm() || P.biz.services; cur.push({id:"s" + (cur.length + 1), name:"", minutes:30, price:0}); P.svcDraft = cur; panelRender(); }
+  else if (a === "svc-del"){ const cur = readSvcForm() || P.biz.services; cur.splice(+el.getAttribute("data-i"), 1); P.svcDraft = cur; panelRender(); }
+  else if (a === "off-add"){
+    const v = $("offDate").value; if (!v) return;
+    const list = (P.biz.daysOff || []).slice(); if (list.indexOf(v) < 0) list.push(v);
+    await saveBiz({daysOff: list}, "Día libre añadido.");
+  }
+  else if (a === "off-del"){ await saveBiz({daysOff: (P.biz.daysOff || []).filter(function(x){ return x !== el.getAttribute("data-d"); })}, "Día libre quitado."); }
+  else if (a === "copy"){
+    const txt = el.getAttribute("data-text");
+    try { await navigator.clipboard.writeText(txt); say("Enlace copiado.", "ok"); }
+    catch (er) { const r = document.createRange(); r.selectNodeContents($("linkText")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); say("Selecciona y copia el enlace.", "ok"); }
+    panelRender();
+  }
+}
+async function panelSubmit(e){
+  const f = e.target; e.preventDefault();
+  if (f.id === "fAuth"){
+    const reg = P.mode === "register", em = f.elements.email.value.trim(), pw = f.elements.pass.value; P.email = em;
+    try {
+      if (reg){
+        const bname = f.elements.bname.value.trim(), slug = f.elements.slug.value.trim().toLowerCase();
+        const err = validSlug(slug); if (err){ say(err, "bad"); return panelRender(); }
+        const ex = await FB.db.doc("businesses/" + slug).get();
+        if (ex.exists){ say("Ese enlace ya está en uso. Prueba otro nombre.", "bad"); return panelRender(); }
+        P.registering = true;
+        let cred;
+        try { cred = await FB.auth.createUserWithEmailAndPassword(em, pw); } catch (er0) { P.registering = false; throw er0; }
+        try {
+          await FB.db.doc("businesses/" + slug).set(defaultBiz(cred.user.uid, em, bname, slug));
+          P.bizId = slug; P.biz = defaultBiz(cred.user.uid, em, bname, slug); P.biz.trialEnd = firebase.firestore.Timestamp.fromDate(new Date(Date.now() + 3 * 86400000)); P.biz.createdAt = null;
+          P.user = cred.user; P.tab = "enlace"; say("¡Listo! Tu agenda está creada. Tienes 3 días gratis.", "ok"); await loadDay();
+        } catch (er2) { P.user = cred.user; say(authErr(er2), "bad"); }
+        P.registering = false;
+        panelRender();
+      } else {
+        await FB.auth.signInWithEmailAndPassword(em, pw); say("");
+      }
+    } catch (er) { say(authErr(er), "bad"); panelRender(); }
+  }
+  else if (f.id === "fCreate"){
+    const bname = f.elements.bname.value.trim(), slug = f.elements.slug.value.trim().toLowerCase();
+    const err = validSlug(slug); if (err){ say(err, "bad"); return panelRender(); }
+    try {
+      const ex = await FB.db.doc("businesses/" + slug).get();
+      if (ex.exists){ say("Ese enlace ya está en uso. Prueba otro.", "bad"); return panelRender(); }
+      const data = defaultBiz(P.user.uid, P.user.email, bname, slug);
+      await FB.db.doc("businesses/" + slug).set(data);
+      P.bizId = slug; P.biz = data; P.tab = "enlace"; say("¡Listo! Tu agenda está creada.", "ok"); await loadDay();
+    } catch (er) { say(authErr(er), "bad"); }
+    panelRender();
+  }
+  else if (f.id === "fSvc"){
+    const list = readSvcForm(), step = P.biz.slotMinutes || 30;
+    if (!list.length){ say("Añade al menos un servicio.", "bad"); return panelRender(); }
+    for (let i = 0; i < list.length; i++){
+      const s = list[i];
+      if (!s.name || !(s.minutes >= 5) || !(s.price >= 0)){ say("Revisa los servicios: nombre, minutos y precio.", "bad"); P.svcDraft = list; return panelRender(); }
+      if (Math.ceil(s.minutes / step) > 4){ say("“" + s.name + "” dura demasiado para turnos de " + step + " min (máximo " + (4 * step) + " min). Sube la duración del turno en Horario o acorta el servicio.", "bad"); P.svcDraft = list; return panelRender(); }
+    }
+    P.svcDraft = null; await saveBiz({services: list}, "Servicios guardados.");
+  }
+  else if (f.id === "fHours"){
+    const hours = {};
+    for (let d = 0; d < 7; d++){
+      hours[d] = {on: f.elements["on" + d].checked, open: f.elements["o" + d].value || "09:00", close: f.elements["c" + d].value || "18:00", bs: f.elements["bs" + d].value || "", be: f.elements["be" + d].value || ""};
+      if (hours[d].on && toMin(hours[d].open) >= toMin(hours[d].close)){ say(DAYNAMES[d] + ": la hora de cierre debe ser después de la de apertura.", "bad"); return panelRender(); }
+      if ((hours[d].bs && !hours[d].be) || (!hours[d].bs && hours[d].be)){ say(DAYNAMES[d] + ": completa el descanso (de / a) o déjalo vacío.", "bad"); return panelRender(); }
+    }
+    const slotMinutes = +f.elements.slotMinutes.value;
+    const tooLong = (P.biz.services || []).filter(function(s){ return Math.ceil(s.minutes / slotMinutes) > 4; })[0];
+    if (tooLong){ say("“" + tooLong.name + "” dura demasiado para turnos de " + slotMinutes + " min. Elige un turno más largo o acorta el servicio.", "bad"); return panelRender(); }
+    await saveBiz({hours: hours, slotMinutes: slotMinutes}, "Horario guardado."); await loadDay(); panelRender();
+  }
+  else if (f.id === "fBiz"){
+    await saveBiz({name: f.elements.bname.value.trim(), currency: f.elements.currency.value.trim()}, "Datos guardados.");
+  }
+}
+function validSlug(s){
+  if (!/^[a-z0-9-]{3,30}$/.test(s)) return "El enlace debe tener 3 a 30 caracteres: letras minúsculas, números y guiones.";
+  if (RESERVED.indexOf(s) >= 0) return "Ese enlace está reservado. Elige otro.";
+  return "";
+}
+
+/* ===================================================================
+   PANEL DE ADMINISTRADOR  (?admin)
+   =================================================================== */
+const A = { user:null, isAdmin:false, list:[], loading:true, msg:"", msgKind:"ok", err:"" };
+async function adminInit(){
+  document.body.classList.add("appmode");
+  adminRender();
+  try { await initFirebase(); } catch (e) { A.loading = false; A.msg = "No se pudo conectar."; A.msgKind = "bad"; adminRender(); return; }
+  FB.auth.onAuthStateChanged(async function(u){
+    A.user = u; A.isAdmin = false; A.loading = false;
+    if (u){
+      try {
+        const s = await FB.db.doc("admins/" + u.uid).get();
+        A.isAdmin = s.exists;
+        if (A.isAdmin) await adminLoad();
+      } catch (e) { A.isAdmin = false; }
+    }
+    adminRender();
+  });
+}
+async function adminLoad(){
+  const q = await FB.db.collection("businesses").get();
+  A.list = q.docs.map(function(d){ return Object.assign({id: d.id}, d.data()); });
+  A.list.sort(function(x, y){ const a = tsToDate(x.createdAt), b = tsToDate(y.createdAt); return (b ? b.getTime() : 0) - (a ? a.getTime() : 0); });
+}
+function adminRender(){
+  let h = '<div class="apphead"><div class="bname">Millon Reserv · Admin</div>' + (A.user ? '<button class="btn ghost sm" data-act="a-logout" type="button">Salir</button>' : '') + '</div>';
+  if (A.msg) h += '<div class="note ' + A.msgKind + '">' + esc(A.msg) + '</div>';
+  if (A.loading) h += '<div class="glass box center">Cargando…</div>';
+  else if (!A.user){
+    h += '<div class="glass box"><div class="stitle">Entrar como administrador</div><form class="form" id="aAuth"><label>Correo<input name="email" type="email" required></label><label>Contraseña<input name="pass" type="password" required></label><button class="ok" type="submit">Entrar</button></form></div>';
+  } else if (!A.isAdmin){
+    h += '<div class="glass box"><div class="stitle">Falta un paso</div><p>Esta cuenta aún no es de administrador. En Firebase, abre <b>Firestore Database → Iniciar colección</b>, crea la colección <b>admins</b> y como ID del documento pega este código (no hace falta añadir campos; si lo exige, añade uno de texto llamado "rol" con valor "admin"):</p><div class="linkbox">' + esc(A.user.uid) + '</div><p class="mute small">Cuando lo hagas, recarga esta página.</p></div>';
+  } else {
+    h += '<div class="glass box"><div class="stitle">Negocios (' + A.list.length + ')</div>';
+    if (!A.list.length) h += '<p class="mute">Todavía no hay negocios.</p>';
+    A.list.forEach(function(b){
+      const t = tsToDate(b.trialEnd), p = tsToDate(b.paidUntil), open = isOpen(b);
+      let st = p && p.getTime() > Date.now() ? 'Pagado hasta ' + p.toLocaleDateString("es") : (t && t.getTime() > Date.now() ? 'Prueba: ' + daysLeft(t) + ' día(s)' : 'Prueba terminada');
+      h += '<div class="arow big"><span class="ainfo"><b>' + esc(b.name) + '</b> <span class="pill2 ' + (open ? "ok" : "bad") + '">' + (open ? "abierto" : "cerrado") + '</span><br><span class="mute small">' + esc(b.ownerEmail || "") + ' · ' + esc(st) + '</span><br><a class="small" href="?b=' + esc(b.id) + '" target="_blank" rel="noopener">?b=' + esc(b.id) + '</a></span><span class="btnrow"><button type="button" class="btn primary sm" data-act="a-pay" data-id="' + esc(b.id) + '">+30 días pagados</button><button type="button" class="btn ghost sm" data-act="a-toggle" data-id="' + esc(b.id) + '">' + (b.active ? "Pausar" : "Activar") + '</button></span></div>';
+    });
+    h += '</div>';
+  }
+  root.innerHTML = h;
+}
+async function adminClick(e){
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const a = el.getAttribute("data-act"), id = el.getAttribute("data-id");
+  if (a === "a-logout"){ await FB.auth.signOut(); return; }
+  const b = A.list.filter(function(x){ return x.id === id; })[0];
+  try {
+    if (a === "a-pay"){
+      const cur = tsToDate(b.paidUntil), baseT = cur && cur.getTime() > Date.now() ? cur.getTime() : Date.now();
+      await FB.db.doc("businesses/" + id).update({paidUntil: firebase.firestore.Timestamp.fromDate(new Date(baseT + 30 * 86400000)), active: true});
+    } else if (a === "a-toggle"){
+      await FB.db.doc("businesses/" + id).update({active: !b.active});
+    }
+    await adminLoad(); A.msg = "Listo."; A.msgKind = "ok";
+  } catch (er) { A.msg = authErr(er); A.msgKind = "bad"; }
+  adminRender();
+}
+async function adminSubmit(e){
+  if (e.target.id !== "aAuth") return;
+  e.preventDefault();
+  try { await FB.auth.signInWithEmailAndPassword(e.target.elements.email.value.trim(), e.target.elements.pass.value); A.msg = ""; }
+  catch (er) { A.msg = authErr(er); A.msgKind = "bad"; adminRender(); }
+}
+
+/* ---------- arranque de las rutas ---------- */
+if (APPMODE){
+  $("view-landing").hidden = true;
+  document.body.classList.add("appmode");
+  root.hidden = false;
+  document.documentElement.lang = state.lang;
+  if (ROUTE === "book"){ root.addEventListener("click", bookClick); root.addEventListener("input", function(e){ if (e.target.id === "bk-name") bk.name = e.target.value; if (e.target.id === "bk-phone") bk.phone = e.target.value; }); bookInit(); }
+  else if (ROUTE === "panel"){
+    root.addEventListener("click", panelClick); root.addEventListener("submit", panelSubmit);
+    root.addEventListener("change", function(e){ if (e.target.id === "pickDate" && e.target.value){ P.date = e.target.value; P.confirmId = null; loadDay().then(panelRender); } });
+    root.addEventListener("input", function(e){ if (e.target.name === "bname" && e.target.form && e.target.form.elements.slug && !e.target.form.elements.slug.dataset.touched) e.target.form.elements.slug.value = slugify(e.target.value); if (e.target.name === "slug") e.target.dataset.touched = "1"; });
+    panelInit();
+  } else {
+    root.addEventListener("click", adminClick); root.addEventListener("submit", adminSubmit); adminInit();
+  }
+}
+
+
 
 /* ===== luces flotantes ===== */
 (function(){
@@ -668,6 +1375,7 @@ renderDemo();
 /* ===== medusa (canvas con fisica) ===== */
 (function(){
   var cv = $("jelly"); if (!cv || !cv.getContext) return;
+  if (APPMODE){ cv.style.display = "none"; return; }
   var ctx = cv.getContext("2d");
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var W, H, DPR, S, mobile;
